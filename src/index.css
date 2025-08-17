@@ -143,6 +143,6 @@ All colors MUST be HSL for perfect theming.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter;
   }
 }

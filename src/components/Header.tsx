@@ -13,7 +13,7 @@ const Header = () => {
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center space-x-8">
-          <h1 className="text-2xl font-bold bg-gradient-text bg-clip-text text-transparent">
+          <h1 className="text-2xl font-bold font-display bg-gradient-text bg-clip-text text-transparent tracking-wide">
             StreamVizion
           </h1>
           

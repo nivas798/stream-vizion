@@ -6,8 +6,50 @@ import movie1 from "@/assets/movie1.jpg";
 import movie2 from "@/assets/movie2.jpg";
 import movie3 from "@/assets/movie3.jpg";
 import movie4 from "@/assets/movie4.jpg";
+import baahubali from "@/assets/baahubali.jpg";
+import rrr from "@/assets/rrr.jpg";
+import pushpa from "@/assets/pushpa.jpg";
+import arjunReddy from "@/assets/arjun-reddy.jpg";
 
-// Sample movie data
+const teluguMovies = [
+  {
+    id: "tel1",
+    title: "Baahubali: The Beginning",
+    image: baahubali,
+    genre: "Epic Drama",
+    duration: "2h 39m",
+    rating: "8.0",
+    description: "A legendary tale of courage and sacrifice in the kingdom of Mahishmati."
+  },
+  {
+    id: "tel2", 
+    title: "RRR",
+    image: rrr,
+    genre: "Period Action",
+    duration: "3h 7m",
+    rating: "7.9",
+    description: "Two legendary revolutionaries and their journey away from home before they started fighting for their country."
+  },
+  {
+    id: "tel3",
+    title: "Pushpa: The Rise",
+    image: pushpa,
+    genre: "Action Drama",
+    duration: "2h 59m", 
+    rating: "7.6",
+    description: "Violence erupts between red sandalwood smugglers and the police charged with bringing down their organization."
+  },
+  {
+    id: "tel4",
+    title: "Arjun Reddy",
+    image: arjunReddy,
+    genre: "Romance Drama",
+    duration: "3h 2m",
+    rating: "8.1",
+    description: "A short-tempered house surgeon gets used to drugs and drink when his girlfriend is forced to marry another person."
+  }
+];
+
 const featuredMovies = [
   {
     id: "1",
@@ -100,6 +142,9 @@ const Index = () => {
 
       {/* Content Sections */}
       <main className="container mx-auto px-4 py-16 space-y-16">
+        {/* Telugu Cinema */}
+        <MovieRow title="🎬 Telugu Cinema" movies={teluguMovies} />
+
         {/* Featured Content */}
         <MovieRow title="Featured Movies" movies={featuredMovies} />
 
@@ -111,7 +156,7 @@ const Index = () => {
 
         {/* User Uploads Section */}
         <div className="text-center bg-gradient-card rounded-2xl p-12 border border-border/50">
-          <h2 className="text-3xl font-bold mb-4">
+          <h2 className="text-3xl font-bold font-display mb-4">
             Share Your{" "}
             <span className="bg-gradient-text bg-clip-text text-transparent">
               Creative Vision
@@ -137,7 +182,7 @@ const Index = () => {
             <div className="w-16 h-16 bg-gradient-hero rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-2xl font-bold text-white">ABR</span>
             </div>
-            <h3 className="text-xl font-bold mb-2">Adaptive Bitrate</h3>
+            <h3 className="text-xl font-bold font-display mb-2">Adaptive Bitrate</h3>
             <p className="text-muted-foreground">
               Automatically adjusts quality based on your connection for seamless streaming.
             </p>
@@ -147,7 +192,7 @@ const Index = () => {
             <div className="w-16 h-16 bg-gradient-hero rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-2xl font-bold text-white">4K</span>
             </div>
-            <h3 className="text-xl font-bold mb-2">Ultra HD Quality</h3>
+            <h3 className="text-xl font-bold font-display mb-2">Ultra HD Quality</h3>
             <p className="text-muted-foreground">
               Experience cinema-quality video with support for 4K, HDR, and Dolby Atmos.
             </p>
@@ -157,7 +202,7 @@ const Index = () => {
             <div className="w-16 h-16 bg-gradient-hero rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-2xl font-bold text-white">AI</span>
             </div>
-            <h3 className="text-xl font-bold mb-2">Smart Enhancement</h3>
+            <h3 className="text-xl font-bold font-display mb-2">Smart Enhancement</h3>
             <p className="text-muted-foreground">
               AI-powered video enhancement for brightness, contrast, and visual quality.
             </p>

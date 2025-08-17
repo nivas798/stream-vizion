@@ -25,7 +25,7 @@ const HeroSection = () => {
         </div>
 
         {/* Title */}
-        <h1 className="text-5xl md:text-7xl font-bold mb-4 leading-tight">
+        <h1 className="text-5xl md:text-7xl font-bold font-display mb-4 leading-tight tracking-tight">
           The Future of
           <span className="block bg-gradient-text bg-clip-text text-transparent">
             Streaming
