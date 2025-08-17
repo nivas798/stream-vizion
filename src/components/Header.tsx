@@ -20,16 +20,13 @@ const Header = () => {
           {/* Navigation */}
           <nav className="hidden md:flex space-x-6">
             <Button variant="ghost" className="text-foreground hover:text-primary">
-              Home
+              Upload
             </Button>
             <Button variant="ghost" className="text-foreground hover:text-primary">
-              Movies
+              Preview
             </Button>
             <Button variant="ghost" className="text-foreground hover:text-primary">
-              Live
-            </Button>
-            <Button variant="ghost" className="text-foreground hover:text-primary">
-              My List
+              Download
             </Button>
             <Button variant="ghost" className="text-foreground hover:text-primary">
               About
@@ -43,7 +40,7 @@ const Header = () => {
           <div className="relative hidden md:block">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
             <Input 
-              placeholder="Search movies, shows..."
+              placeholder="Search your videos..."
               className="pl-10 w-64 bg-secondary/50 border-border"
             />
           </div>
@@ -51,12 +48,12 @@ const Header = () => {
           {/* Action buttons */}
           <Button variant="outline" size="sm" className="gap-2">
             <Upload className="w-4 h-4" />
-            Upload
+            Upload Video
           </Button>
           
           <Button variant="default" size="sm" className="gap-2 bg-gradient-hero">
             <Play className="w-4 h-4" />
-            Watch Live
+            Start Editing
           </Button>
 
           {/* User actions */}

@@ -26,16 +26,16 @@ const HeroSection = () => {
 
         {/* Title */}
         <h1 className="text-5xl md:text-7xl font-bold font-display mb-4 leading-tight tracking-tight">
-          The Future of
+          Edit & Enhance
           <span className="block bg-gradient-text bg-clip-text text-transparent">
-            Streaming
+            Your Videos
           </span>
         </h1>
 
         {/* Description */}
         <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-lg">
-          Experience cinema like never before with adaptive streaming, real-time enhancements, 
-          and crystal-clear quality that adapts to your connection.
+          Upload your videos, adjust quality settings with real-time preview, 
+          and download enhanced versions in multiple formats and resolutions.
         </p>
 
         {/* Action Buttons */}
@@ -45,7 +45,7 @@ const HeroSection = () => {
             className="bg-gradient-hero hover:shadow-glow transition-all duration-300 text-lg px-8 py-6"
           >
             <Play className="w-6 h-6 mr-2" />
-            Watch Now
+            Start Editing
           </Button>
           
           <Button 
@@ -54,7 +54,7 @@ const HeroSection = () => {
             className="bg-secondary/30 backdrop-blur-sm border-border hover:bg-secondary/50 text-lg px-8 py-6"
           >
             <Info className="w-6 h-6 mr-2" />
-            More Info
+            Learn More
           </Button>
         </div>
 
@@ -62,19 +62,19 @@ const HeroSection = () => {
         <div className="flex items-center gap-6 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
             <Volume2 className="w-4 h-4" />
-            Dolby Atmos
+            Real-time Preview
           </div>
           <div className="flex items-center gap-2">
             <span className="w-4 h-4 border border-primary rounded text-primary text-xs flex items-center justify-center font-bold">
               4K
             </span>
-            Ultra HD
+            Ultra HD Export
           </div>
           <div className="flex items-center gap-2">
             <span className="w-4 h-4 bg-primary rounded text-primary-foreground text-xs flex items-center justify-center font-bold">
-              HDR
+              AI
             </span>
-            HDR10+
+            Smart Enhancement
           </div>
         </div>
       </div>
