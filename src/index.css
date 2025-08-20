@@ -8,67 +8,68 @@ All colors MUST be HSL for perfect theming.
 
 @layer base {
   :root {
-    /* Netflix-inspired dark theme */
-    --background: 0 0% 8%;
-    --foreground: 0 0% 95%;
+    /* Flowing gradient theme inspired by dynamic waves */
+    --background: 240 20% 6%;
+    --foreground: 240 5% 96%;
 
-    --card: 0 0% 12%;
-    --card-foreground: 0 0% 95%;
+    --card: 240 18% 8%;
+    --card-foreground: 240 5% 96%;
 
-    --popover: 0 0% 10%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 240 18% 8%;
+    --popover-foreground: 240 5% 96%;
 
-    /* Netflix red as primary */
-    --primary: 0 100% 50%;
-    --primary-foreground: 0 0% 100%;
+    /* Primary flowing blues and purples */
+    --primary: 250 100% 70%;
+    --primary-foreground: 240 20% 6%;
 
-    --secondary: 0 0% 18%;
-    --secondary-foreground: 0 0% 95%;
+    --secondary: 260 80% 60%;
+    --secondary-foreground: 240 5% 96%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 65%;
+    --muted: 240 15% 15%;
+    --muted-foreground: 240 5% 70%;
 
-    --accent: 0 100% 50%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 280 100% 75%;
+    --accent-foreground: 240 20% 6%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 18%;
-    --ring: 0 100% 50%;
+    --border: 240 15% 18%;
+    --input: 240 15% 18%;
+    --ring: 250 100% 70%;
 
-    /* Enhanced Netflix-style gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(0 100% 50%) 0%, hsl(0 80% 40%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 12%) 0%, hsl(0 0% 8%) 100%);
-    --gradient-overlay: linear-gradient(180deg, transparent 0%, hsl(0 0% 8% / 0.8) 100%);
-    --gradient-text: linear-gradient(135deg, hsl(0 100% 60%) 0%, hsl(0 100% 80%) 100%);
+    /* Dynamic flowing gradient system */
+    --flow-blue: 220 100% 60%;
+    --flow-purple: 260 100% 70%;
+    --flow-magenta: 300 100% 75%;
+    --deep-purple: 240 20% 6%;
+    
+    /* Hero and background gradients matching the uploaded theme */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--deep-purple)), hsl(var(--flow-purple) / 0.3), hsl(var(--flow-blue) / 0.2));
+    --gradient-card: linear-gradient(135deg, hsl(var(--card) / 0.9), hsl(var(--secondary) / 0.1));
+    --gradient-overlay: linear-gradient(180deg, transparent 0%, hsl(var(--background) / 0.8) 100%);
+    --gradient-text: linear-gradient(135deg, hsl(var(--flow-blue)), hsl(var(--flow-magenta)));
+    --gradient-primary: linear-gradient(135deg, hsl(var(--flow-blue)), hsl(var(--flow-purple)), hsl(var(--flow-magenta)));
+    --gradient-wave: linear-gradient(45deg, hsl(var(--flow-blue) / 0.8), hsl(var(--flow-purple) / 0.6), hsl(var(--flow-magenta) / 0.4));
 
-    /* Advanced shadows for depth */
-    --shadow-netflix: 0 25px 50px -12px hsl(0 0% 0% / 0.8);
-    --shadow-card: 0 10px 30px -10px hsl(0 0% 0% / 0.3);
-    --shadow-glow: 0 0 40px hsl(0 100% 50% / 0.3);
+    /* Flowing shadows and glows */
+    --shadow-netflix: 0 25px 50px -12px hsl(var(--flow-purple) / 0.4);
+    --shadow-card: 0 15px 35px -10px hsl(var(--flow-purple) / 0.3);
+    --shadow-glow: 0 0 60px hsl(var(--flow-blue) / 0.5);
 
-    /* Smooth transitions */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Smooth flowing transitions */
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 

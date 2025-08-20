@@ -10,7 +10,12 @@ const developers = [
     description: "Expert in Node.js, FFmpeg, and streaming technologies. Passionate about building scalable video platforms.",
     skills: ["Node.js", "FFmpeg", "MongoDB", "Docker", "AWS"],
     icon: <Code className="w-6 h-6" />,
-    gradient: "from-blue-500 to-purple-600"
+    gradient: "from-blue-500 to-purple-600",
+    links: {
+      github: "https://github.com/nivas798",
+      linkedin: "https://www.linkedin.com/in/nivas-alugubelli-94bb9a325?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      email: "nivasalugubelli6@gmail.com"
+    }
   },
   {
     name: "Swathi",
@@ -19,7 +24,12 @@ const developers = [
     description: "Specializes in React, modern CSS, and creating beautiful user experiences with attention to detail.",
     skills: ["React", "TypeScript", "Tailwind", "Figma", "Animation"],
     icon: <Palette className="w-6 h-6" />,
-    gradient: "from-pink-500 to-orange-500"
+    gradient: "from-pink-500 to-orange-500",
+    links: {
+      github: "https://github.com/Swathi1056/Swathi",
+      linkedin: "https://www.linkedin.com/in/swathi-p-0ab828307?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      email: "swathi1052006@gmail.com"
+    }
   },
   {
     name: "Krishna Priya",
@@ -28,7 +38,12 @@ const developers = [
     description: "Focuses on deployment automation, performance optimization, and ensuring platform reliability.",
     skills: ["Docker", "Kubernetes", "CI/CD", "Monitoring", "Cloud"],
     icon: <Database className="w-6 h-6" />,
-    gradient: "from-green-500 to-teal-600"
+    gradient: "from-green-500 to-teal-600",
+    links: {
+      github: "https://github.com/Krishnaps-05",
+      linkedin: "https://www.linkedin.com/in/krishna-priya-p-s-0a9217321?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      email: "krishpspriya@gmail.com"
+    }
   }
 ];
 
@@ -89,15 +104,28 @@ const AboutSection = () => {
 
                 {/* Social Links */}
                 <div className="flex justify-center gap-3">
-                  <button className="w-10 h-10 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors duration-200 flex items-center justify-center">
+                  <a 
+                    href={dev.links.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors duration-200 flex items-center justify-center"
+                  >
                     <Github className="w-4 h-4" />
-                  </button>
-                  <button className="w-10 h-10 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors duration-200 flex items-center justify-center">
+                  </a>
+                  <a 
+                    href={dev.links.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors duration-200 flex items-center justify-center"
+                  >
                     <Linkedin className="w-4 h-4" />
-                  </button>
-                  <button className="w-10 h-10 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors duration-200 flex items-center justify-center">
+                  </a>
+                  <a 
+                    href={`mailto:${dev.links.email}`}
+                    className="w-10 h-10 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors duration-200 flex items-center justify-center"
+                  >
                     <Mail className="w-4 h-4" />
-                  </button>
+                  </a>
                 </div>
               </CardContent>
             </Card>
