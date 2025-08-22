@@ -1,8 +1,8 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-const YouTubeLiveStreams = () => {
-  const youtubeVideos = [
+const LiveStreams = () => {
+  const streamVideos = [
     {
       id: "hovezwINQMo",
       title: "Live Stream 1"
@@ -29,26 +29,26 @@ const YouTubeLiveStreams = () => {
     <section className="py-16">
       <div className="text-center mb-16">
         <h2 className="text-4xl font-bold font-display mb-4">
-          YouTube Live{" "}
+          Live{" "}
           <span className="bg-gradient-text bg-clip-text text-transparent">
             Streams
           </span>
         </h2>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Watch our featured YouTube content live. Click on any video to start streaming.
+          Watch our featured live content. Click on any video to start streaming.
         </p>
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {youtubeVideos.map((video, index) => (
+        {streamVideos.map((video, index) => (
           <Card key={video.id} className="overflow-hidden bg-card/30 border border-border/50 hover:shadow-elegant transition-all duration-300 group">
             <div className="relative">
               <div className="absolute top-2 left-2 z-10">
-                <Badge variant="secondary" className="bg-red-600 text-white border-none">
+                <Badge variant="secondary" className="bg-purple-600 text-white border-none">
                   <svg className="w-3 h-3 mr-1" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                   </svg>
-                  YouTube
+                  STREAM
                 </Badge>
               </div>
               
@@ -60,7 +60,7 @@ const YouTubeLiveStreams = () => {
 
               <div className="aspect-video bg-muted/20 relative overflow-hidden">
                 <iframe
-                  src={`https://www.youtube.com/embed/${video.id}?autoplay=0&mute=0&controls=1&rel=0&modestbranding=1`}
+                  src={`https://www.youtube.com/embed/${video.id}?autoplay=0&mute=0&controls=1&rel=0&modestbranding=1&showinfo=0&fs=1&iv_load_policy=3&cc_load_policy=0&disablekb=1`}
                   title={video.title}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -89,11 +89,11 @@ const YouTubeLiveStreams = () => {
 
       <div className="text-center mt-8">
         <p className="text-sm text-muted-foreground">
-          All videos are streamed directly from YouTube • Click to watch in full quality
+          All videos are streamed in high quality • Click to watch fullscreen
         </p>
       </div>
     </section>
   );
 };
 
-export default YouTubeLiveStreams;
+export default LiveStreams;

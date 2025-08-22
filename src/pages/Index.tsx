@@ -5,7 +5,7 @@ import VideoUpload from "@/components/VideoUpload";
 import VideoPreview from "@/components/VideoPreview";
 import VideoDownload from "@/components/VideoDownload";
 import AboutSection from "@/components/AboutSection";
-import YouTubeLiveStreams from "@/components/YouTubeLiveStreams";
+import LiveStreams from "@/components/YouTubeLiveStreams";
 
 interface UploadedFile {
   id: string;
@@ -161,7 +161,7 @@ const Index = () => {
         </section>
 
         {/* YouTube Live Streams Section */}
-        <YouTubeLiveStreams />
+        <LiveStreams />
       </main>
 
       {/* About Section */}
