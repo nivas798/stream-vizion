@@ -113,6 +113,9 @@ const Index = () => {
           </>
         )}
 
+        {/* Live Streams Section */}
+        <LiveStreams />
+
         {/* Features Overview */}
         <section className="py-16">
           <div className="text-center mb-16">
@@ -159,9 +162,6 @@ const Index = () => {
             </div>
           </div>
         </section>
-
-        {/* YouTube Live Streams Section */}
-        <LiveStreams />
       </main>
 
       {/* About Section */}
