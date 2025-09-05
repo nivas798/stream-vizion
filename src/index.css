@@ -2,67 +2,71 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Kapwing-Style Modern Design System
-Clean, professional video editor interface
+/* Black-to-Red Cinematic Design System
+Dramatic video editor interface with motion graphics
 */
 
 @layer base {
   :root {
-    /* Kapwing-inspired Clean Color Palette */
-    --background: 0 0% 100%;
-    --foreground: 222 11% 15%;
+    /* Cinematic Black-to-Red Color Palette */
+    --background: 0 0% 8%;
+    --foreground: 0 0% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222 11% 15%;
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 11% 15%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 98%;
 
-    /* Kapwing pink-to-blue gradient colors */
-    --primary: 320 100% 74%;
+    /* Dramatic red gradient colors */
+    --primary: 0 100% 65%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 12% 96%;
-    --secondary-foreground: 222 11% 15%;
+    --secondary: 0 20% 18%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 210 12% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 0 10% 15%;
+    --muted-foreground: 0 5% 65%;
 
-    --accent: 210 12% 96%;
-    --accent-foreground: 222 11% 15%;
+    --accent: 0 80% 60%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 320 100% 74%;
+    --border: 0 15% 20%;
+    --input: 0 15% 20%;
+    --ring: 0 100% 65%;
 
-    /* Modern gradient system inspired by Kapwing */
-    --kapwing-pink: 320 100% 74%;
-    --kapwing-purple: 280 100% 70%;
-    --kapwing-blue: 220 100% 69%;
-    --kapwing-light: 210 12% 98%;
-    --kapwing-dark: 222 11% 15%;
+    /* Cinematic gradient system */
+    --deep-black: 0 0% 8%;
+    --charcoal: 0 5% 15%;
+    --dark-red: 0 80% 25%;
+    --crimson: 0 100% 50%;
+    --bright-red: 0 100% 65%;
+    --fire-red: 10 100% 60%;
     
-    /* Clean gradient system */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--kapwing-pink)), hsl(var(--kapwing-purple)), hsl(var(--kapwing-blue)));
-    --gradient-card: linear-gradient(135deg, hsl(var(--background)), hsl(var(--kapwing-light)));
-    --gradient-overlay: linear-gradient(180deg, transparent 0%, hsl(var(--background) / 0.9) 100%);
-    --gradient-text: linear-gradient(135deg, hsl(var(--kapwing-pink)), hsl(var(--kapwing-purple)), hsl(var(--kapwing-blue)));
-    --gradient-primary: linear-gradient(135deg, hsl(var(--kapwing-pink)), hsl(var(--kapwing-blue)));
-    --gradient-premium: linear-gradient(135deg, hsl(var(--kapwing-purple)), hsl(var(--kapwing-blue)));
-    --gradient-elegant: linear-gradient(135deg, hsl(var(--kapwing-pink) / 0.1), hsl(var(--kapwing-blue) / 0.1));
+    /* Dramatic gradient system */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--deep-black)), hsl(var(--dark-red)), hsl(var(--bright-red)));
+    --gradient-card: linear-gradient(135deg, hsl(var(--charcoal) / 0.8), hsl(var(--dark-red) / 0.3));
+    --gradient-overlay: linear-gradient(180deg, transparent 0%, hsl(var(--deep-black) / 0.9) 100%);
+    --gradient-text: linear-gradient(135deg, hsl(var(--crimson)), hsl(var(--bright-red)), hsl(var(--fire-red)));
+    --gradient-primary: linear-gradient(135deg, hsl(var(--dark-red)), hsl(var(--bright-red)));
+    --gradient-premium: linear-gradient(135deg, hsl(var(--crimson)), hsl(var(--fire-red)));
+    --gradient-elegant: linear-gradient(135deg, hsl(var(--charcoal)), hsl(var(--dark-red) / 0.5));
+    --gradient-motion: linear-gradient(90deg, hsl(var(--deep-black)), hsl(var(--dark-red)), hsl(var(--bright-red)), hsl(var(--fire-red)));
 
-    /* Clean shadows and effects */
-    --shadow-elegant: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
-    --shadow-premium: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05);
-    --shadow-glow: 0 0 0 1px hsl(var(--kapwing-pink) / 0.1);
-    --shadow-card-hover: 0 25px 50px -12px rgb(0 0 0 / 0.15);
+    /* Cinematic shadows and effects */
+    --shadow-elegant: 0 32px 64px -12px hsl(var(--bright-red) / 0.4);
+    --shadow-premium: 0 20px 40px -8px hsl(var(--crimson) / 0.3);
+    --shadow-glow: 0 0 80px hsl(var(--bright-red) / 0.6);
+    --shadow-card-hover: 0 25px 50px -12px hsl(var(--bright-red) / 0.5);
+    --shadow-red-intense: 0 0 100px hsl(var(--bright-red) / 0.8);
 
-    /* Smooth modern transitions */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    /* Smooth cinematic transitions */
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-pulse: all 2s cubic-bezier(0.4, 0, 0.6, 1);
 
     --radius: 0.75rem;
 
@@ -77,41 +81,41 @@ Clean, professional video editor interface
   }
 
   .dark {
-    --background: 222 11% 15%;
+    --background: 0 0% 4%;
     --foreground: 0 0% 100%;
 
-    --card: 240 10% 3.9%;
+    --card: 0 5% 8%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 240 10% 3.9%;
+    --popover: 0 5% 8%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 320 100% 74%;
-    --primary-foreground: 222 11% 15%;
+    --primary: 0 100% 70%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 240 3.7% 15.9%;
+    --secondary: 0 20% 12%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted: 0 10% 10%;
+    --muted-foreground: 0 5% 60%;
 
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 0 80% 65%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 320 100% 74%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 320 100% 74%;
+    --border: 0 15% 18%;
+    --input: 0 15% 18%;
+    --ring: 0 100% 70%;
+    --sidebar-background: 0 5% 6%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 0 100% 65%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 320 100% 74%;
+    --sidebar-accent: 0 10% 12%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 15% 15%;
+    --sidebar-ring: 0 100% 65%;
   }
 
   /* Scrollbar styling */
@@ -124,7 +128,7 @@ Clean, professional video editor interface
     display: none;
   }
 
-  /* Custom animations */
+  /* Cinematic Motion Graphics */
   @keyframes fadeInUp {
     from {
       opacity: 0;
@@ -136,8 +140,81 @@ Clean, professional video editor interface
     }
   }
 
+  @keyframes redPulse {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(var(--bright-red) / 0.4);
+    }
+    50% {
+      box-shadow: 0 0 60px hsl(var(--bright-red) / 0.8), 0 0 100px hsl(var(--bright-red) / 0.4);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes floatingAnimation {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-20px) rotate(5deg);
+    }
+  }
+
+  @keyframes redGradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
   .animate-fade-in-up {
     animation: fadeInUp 0.6s ease-out;
+  }
+
+  .animate-red-pulse {
+    animation: redPulse 2s ease-in-out infinite;
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.8s ease-out;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.8s ease-out;
+  }
+
+  .animate-floating {
+    animation: floatingAnimation 6s ease-in-out infinite;
+  }
+
+  .animate-gradient-shift {
+    background-size: 200% 200%;
+    animation: redGradientShift 4s ease infinite;
   }
 }
 
@@ -147,7 +224,9 @@ Clean, professional video editor interface
   }
 
   body {
-    @apply bg-background text-foreground font-inter;
+    @apply bg-background text-foreground;
+    font-family: 'Orbitron', 'Inter', system-ui, sans-serif;
     scroll-behavior: smooth;
+    background: linear-gradient(135deg, hsl(var(--deep-black)), hsl(var(--charcoal)));
   }
 }

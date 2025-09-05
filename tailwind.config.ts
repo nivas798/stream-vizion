@@ -71,20 +71,24 @@ export default {
 				'gradient-primary': 'var(--gradient-primary)',
 				'gradient-premium': 'var(--gradient-premium)',
 				'gradient-elegant': 'var(--gradient-elegant)',
+				'gradient-motion': 'var(--gradient-motion)',
 			},
 			boxShadow: {
 				'elegant': 'var(--shadow-elegant)',
 				'premium': 'var(--shadow-premium)',
 				'glow': 'var(--shadow-glow)',
 				'card-hover': 'var(--shadow-card-hover)',
+				'red-intense': 'var(--shadow-red-intense)',
 			},
 			transitionTimingFunction: {
 				'smooth': 'var(--transition-smooth)',
 				'bounce': 'var(--transition-bounce)',
 			},
 			fontFamily: {
+				'orbitron': ['Orbitron', 'monospace'],
 				'inter': ['Inter', 'system-ui', 'sans-serif'],
-				'display': ['Inter', 'system-ui', 'sans-serif'],
+				'display': ['Orbitron', 'Inter', 'system-ui', 'sans-serif'],
+				'cinematic': ['Orbitron', 'system-ui', 'sans-serif'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
