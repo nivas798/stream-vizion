@@ -1,88 +1,57 @@
 import { Button } from "@/components/ui/button";
-import { Play, Info, Volume2 } from "lucide-react";
-import heroBanner from "@/assets/hero-banner.jpg";
+import { ArrowRight } from "lucide-react";
 
 const HeroSection = () => {
   return (
-    <section className="relative h-screen flex items-center justify-start">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src={heroBanner}
-          alt="Featured Content"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-overlay"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent"></div>
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 max-w-2xl">
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 bg-primary/20 text-primary px-3 py-1 rounded-full text-sm font-medium mb-4">
-          <span className="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
-          FEATURED CONTENT
-        </div>
-
-        {/* Title */}
-        <h1 className="text-5xl md:text-7xl font-bold font-display mb-4 leading-tight tracking-tight">
-          Edit & Enhance
-          <span className="block bg-gradient-text bg-clip-text text-transparent">
-            Your Videos
-          </span>
-        </h1>
-
-        {/* Description */}
-        <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-lg">
-          Upload your videos, adjust quality settings with real-time preview, 
-          and download enhanced versions in multiple formats and resolutions.
-        </p>
-
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-8">
-          <Button 
-            size="lg" 
-            className="bg-gradient-hero hover:shadow-glow transition-all duration-300 text-lg px-8 py-6"
-          >
-            <Play className="w-6 h-6 mr-2" />
-            Start Editing
-          </Button>
-          
-          <Button 
-            variant="outline" 
-            size="lg" 
-            className="bg-secondary/30 backdrop-blur-sm border-border hover:bg-secondary/50 text-lg px-8 py-6"
-          >
-            <Info className="w-6 h-6 mr-2" />
-            Learn More
-          </Button>
-        </div>
-
-        {/* Features */}
-        <div className="flex items-center gap-6 text-sm text-muted-foreground">
-          <div className="flex items-center gap-2">
-            <Volume2 className="w-4 h-4" />
-            Real-time Preview
+    <section className="pt-24 pb-16 bg-gradient-to-b from-background to-muted/20">
+      <div className="container mx-auto px-4">
+        <div className="text-center max-w-4xl mx-auto">
+          {/* Breadcrumb */}
+          <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-8">
+            <span>HOME</span>
+            <span>&gt;</span>
+            <span className="text-foreground font-medium">VIDEO EDITOR</span>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="w-4 h-4 border border-primary rounded text-primary text-xs flex items-center justify-center font-bold">
-              4K
-            </span>
-            Ultra HD Export
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="w-4 h-4 bg-primary rounded text-primary-foreground text-xs flex items-center justify-center font-bold">
-              AI
-            </span>
-            Smart Enhancement
-          </div>
-        </div>
-      </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-        <div className="w-6 h-10 border-2 border-muted-foreground rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-muted-foreground rounded-full mt-2 animate-bounce"></div>
+          {/* Main Title */}
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight tracking-tight">
+            ONLINE VIDEO EDITOR
+          </h1>
+
+          {/* Subtitle */}
+          <p className="text-xl text-foreground mb-4">
+            Edit videos for free.
+          </p>
+          <p className="text-lg text-muted-foreground mb-12">
+            No downloads required.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+            <Button 
+              size="lg" 
+              className="bg-gradient-hero hover:shadow-glow transition-all duration-300 text-lg px-8 py-6 rounded-full"
+            >
+              Edit Video
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+            
+            <Button 
+              variant="link" 
+              className="text-muted-foreground hover:text-foreground underline"
+            >
+              or, try a sample
+            </Button>
+          </div>
+
+          {/* Trust Logos */}
+          <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
+            <div className="text-2xl font-bold text-muted-foreground">Spotify</div>
+            <div className="text-2xl font-bold text-muted-foreground">Google</div>
+            <div className="text-2xl font-bold text-muted-foreground">Facebook</div>
+            <div className="text-2xl font-bold text-muted-foreground">Harvard</div>
+            <div className="text-2xl font-bold text-muted-foreground">NYU</div>
+          </div>
         </div>
       </div>
     </section>

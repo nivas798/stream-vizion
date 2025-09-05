@@ -2,67 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-/* StreamVizion Netflix-Style Design System
-All colors MUST be HSL for perfect theming.
+/* Kapwing-Style Modern Design System
+Clean, professional video editor interface
 */
 
 @layer base {
   :root {
-    /* Premium Professional Color Palette */
-    --background: 240 15% 4%;
-    --foreground: 240 8% 98%;
+    /* Kapwing-inspired Clean Color Palette */
+    --background: 0 0% 100%;
+    --foreground: 222 11% 15%;
 
-    --card: 240 12% 6%;
-    --card-foreground: 240 8% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 11% 15%;
 
-    --popover: 240 12% 6%;
-    --popover-foreground: 240 8% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 11% 15%;
 
-    /* Elite gradient blues and purples */
-    --primary: 245 100% 65%;
-    --primary-foreground: 240 15% 4%;
+    /* Kapwing pink-to-blue gradient colors */
+    --primary: 320 100% 74%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 265 85% 58%;
-    --secondary-foreground: 240 8% 98%;
+    --secondary: 210 12% 96%;
+    --secondary-foreground: 222 11% 15%;
 
-    --muted: 240 12% 12%;
-    --muted-foreground: 240 8% 75%;
+    --muted: 210 12% 96%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 285 100% 68%;
-    --accent-foreground: 240 15% 4%;
+    --accent: 210 12% 96%;
+    --accent-foreground: 222 11% 15%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 12% 15%;
-    --input: 240 12% 15%;
-    --ring: 245 100% 65%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 320 100% 74%;
 
-    /* Premium gradient system */
-    --flow-blue: 210 100% 65%;
-    --flow-purple: 265 100% 68%;
-    --flow-magenta: 300 100% 72%;
-    --flow-cyan: 185 100% 62%;
-    --flow-emerald: 155 100% 55%;
-    --deep-navy: 240 15% 4%;
+    /* Modern gradient system inspired by Kapwing */
+    --kapwing-pink: 320 100% 74%;
+    --kapwing-purple: 280 100% 70%;
+    --kapwing-blue: 220 100% 69%;
+    --kapwing-light: 210 12% 98%;
+    --kapwing-dark: 222 11% 15%;
     
-    /* Premium gradient system */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--deep-navy)), hsl(var(--flow-purple) / 0.4), hsl(var(--flow-cyan) / 0.3));
-    --gradient-card: linear-gradient(135deg, hsl(var(--card) / 0.95), hsl(var(--flow-blue) / 0.08));
+    /* Clean gradient system */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--kapwing-pink)), hsl(var(--kapwing-purple)), hsl(var(--kapwing-blue)));
+    --gradient-card: linear-gradient(135deg, hsl(var(--background)), hsl(var(--kapwing-light)));
     --gradient-overlay: linear-gradient(180deg, transparent 0%, hsl(var(--background) / 0.9) 100%);
-    --gradient-text: linear-gradient(135deg, hsl(var(--flow-cyan)), hsl(var(--flow-purple)), hsl(var(--flow-magenta)));
-    --gradient-primary: linear-gradient(135deg, hsl(var(--flow-blue)), hsl(var(--flow-purple)), hsl(var(--flow-magenta)));
-    --gradient-premium: linear-gradient(135deg, hsl(var(--flow-cyan)), hsl(var(--flow-blue)), hsl(var(--flow-purple)));
-    --gradient-elegant: linear-gradient(135deg, hsl(var(--flow-emerald) / 0.6), hsl(var(--flow-cyan) / 0.7), hsl(var(--flow-blue) / 0.8));
+    --gradient-text: linear-gradient(135deg, hsl(var(--kapwing-pink)), hsl(var(--kapwing-purple)), hsl(var(--kapwing-blue)));
+    --gradient-primary: linear-gradient(135deg, hsl(var(--kapwing-pink)), hsl(var(--kapwing-blue)));
+    --gradient-premium: linear-gradient(135deg, hsl(var(--kapwing-purple)), hsl(var(--kapwing-blue)));
+    --gradient-elegant: linear-gradient(135deg, hsl(var(--kapwing-pink) / 0.1), hsl(var(--kapwing-blue) / 0.1));
 
-    /* Professional shadows and effects */
-    --shadow-elegant: 0 32px 64px -12px hsl(var(--flow-purple) / 0.35);
-    --shadow-premium: 0 20px 40px -8px hsl(var(--flow-blue) / 0.25);
-    --shadow-glow: 0 0 80px hsl(var(--flow-cyan) / 0.4);
-    --shadow-card-hover: 0 25px 50px -12px hsl(var(--flow-purple) / 0.5);
+    /* Clean shadows and effects */
+    --shadow-elegant: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+    --shadow-premium: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05);
+    --shadow-glow: 0 0 0 1px hsl(var(--kapwing-pink) / 0.1);
+    --shadow-card-hover: 0 25px 50px -12px rgb(0 0 0 / 0.15);
 
-    /* Smooth flowing transitions */
-    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* Smooth modern transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --radius: 0.75rem;
@@ -78,41 +77,41 @@ All colors MUST be HSL for perfect theming.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 222 11% 15%;
+    --foreground: 0 0% 100%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 320 100% 74%;
+    --primary-foreground: 222 11% 15%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 320 100% 74%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary: 320 100% 74%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 320 100% 74%;
   }
 
   /* Scrollbar styling */
@@ -149,5 +148,6 @@ All colors MUST be HSL for perfect theming.
 
   body {
     @apply bg-background text-foreground font-inter;
+    scroll-behavior: smooth;
   }
 }

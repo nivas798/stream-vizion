@@ -68,6 +68,7 @@ export default {
 				'gradient-card': 'var(--gradient-card)',
 				'gradient-overlay': 'var(--gradient-overlay)',
 				'gradient-text': 'var(--gradient-text)',
+				'gradient-primary': 'var(--gradient-primary)',
 				'gradient-premium': 'var(--gradient-premium)',
 				'gradient-elegant': 'var(--gradient-elegant)',
 			},

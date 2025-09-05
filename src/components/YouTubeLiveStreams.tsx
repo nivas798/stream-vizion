@@ -90,41 +90,32 @@ const LiveStreams = () => {
   }, []);
 
   return (
-    <section className="py-20 bg-gradient-hero relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-overlay"></div>
-      <div className="relative z-10 text-center mb-20">
-        <div className="inline-flex items-center gap-3 bg-card/20 backdrop-blur-xl border border-border/30 rounded-full px-6 py-2 mb-6">
-          <div className="w-2 h-2 bg-gradient-premium rounded-full animate-pulse"></div>
-          <span className="text-sm font-medium text-muted-foreground">Premium 4K Collection</span>
+    <section className="py-20 bg-background">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 bg-muted/50 rounded-full px-4 py-2 mb-6">
+            <div className="w-2 h-2 bg-gradient-primary rounded-full animate-pulse"></div>
+            <span className="text-sm font-medium text-muted-foreground">Premium 4K Collection</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Ultra HD{" "}
+            <span className="bg-gradient-text bg-clip-text text-transparent">
+              4K Streaming
+            </span>
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Experience cinematic quality with our curated collection of 4K ultra-high definition content
+          </p>
         </div>
-        <h2 className="text-5xl md:text-6xl font-bold font-display mb-6">
-          Ultra HD{" "}
-          <span className="bg-gradient-text bg-clip-text text-transparent">
-            4K Streaming
-          </span>
-        </h2>
-        <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-          Experience cinematic quality with our curated collection of 4K ultra-high definition content
-        </p>
-      </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 z-10">
-        <Carousel
-          opts={{
-            align: "start",
-            loop: true,
-            skipSnaps: false,
-            dragFree: true,
-          }}
-          className="w-full"
-        >
-          <CarouselContent className="-ml-3 md:-ml-4">
-            {streamVideos.map((video, index) => (
-              <CarouselItem key={video.id} className="pl-3 md:pl-4 basis-4/5 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                <Card className="overflow-hidden bg-gradient-card backdrop-blur-xl border border-border/30 hover:shadow-card-hover hover:border-primary/30 transition-all duration-700 group">
+        <div className="relative">
+          <div className="overflow-x-auto scrollbar-hide">
+            <div className="flex gap-6 pb-4" style={{ width: 'max-content' }}>
+              {streamVideos.map((video, index) => (
+                <Card key={video.id} className="flex-shrink-0 w-80 overflow-hidden bg-card border border-border hover:shadow-card-hover hover:border-primary/20 transition-all duration-500 group">
                   <div className="relative">
                     <div className="absolute top-3 left-3 z-20 flex gap-2">
-                      <Badge className="bg-gradient-premium text-white border-none backdrop-blur-sm shadow-lg">
+                      <Badge className="bg-gradient-primary text-white border-none shadow-premium">
                         <svg className="w-3 h-3 mr-1.5" viewBox="0 0 24 24" fill="currentColor">
                           <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                         </svg>
@@ -133,13 +124,13 @@ const LiveStreams = () => {
                     </div>
                     
                     <div className="absolute top-3 right-3 z-20">
-                      <Badge variant="outline" className="bg-gradient-to-r from-red-500 to-red-600 text-white border-red-400/50 animate-pulse backdrop-blur-sm shadow-lg">
+                      <Badge variant="outline" className="bg-red-500 text-white border-red-400/50 animate-pulse">
                         <div className="w-2 h-2 bg-white rounded-full mr-1.5 animate-pulse"></div>
                         LIVE
                       </Badge>
                     </div>
 
-                    <div className="aspect-video bg-gradient-hero relative overflow-hidden rounded-t-lg">
+                    <div className="aspect-video bg-muted relative overflow-hidden rounded-t-lg">
                       <iframe
                         ref={(el) => {
                           if (el) videoRefs.current[index] = el as unknown as HTMLVideoElement;
@@ -148,53 +139,45 @@ const LiveStreams = () => {
                         title={video.title}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowFullScreen
-                        className="w-full h-full group-hover:scale-110 transition-transform duration-700 ease-out"
+                        className="w-full h-full group-hover:scale-105 transition-transform duration-500 ease-out"
                       />
-                      <div className="absolute inset-0 bg-gradient-overlay opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
+                      <div className="absolute inset-0 bg-gradient-overlay opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                     </div>
                   </div>
 
-                  <div className="p-5 bg-gradient-card">
-                    <h3 className="font-bold font-display mb-3 text-lg group-hover:bg-gradient-text group-hover:bg-clip-text group-hover:text-transparent transition-all duration-500 line-clamp-2">
+                  <div className="p-5">
+                    <h3 className="font-bold mb-3 text-lg group-hover:bg-gradient-text group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300 line-clamp-2">
                       {video.title}
                     </h3>
                     <div className="flex items-center justify-between text-sm">
                       <div className="flex items-center text-muted-foreground">
-                        <div className="w-2 h-2 bg-gradient-premium rounded-full mr-2 animate-pulse shadow-glow"></div>
+                        <div className="w-2 h-2 bg-gradient-primary rounded-full mr-2 animate-pulse"></div>
                         <span className="font-medium">Streaming Now</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs bg-gradient-elegant text-white px-3 py-1 rounded-full font-semibold shadow-premium">
+                        <span className="text-xs bg-gradient-elegant text-primary px-3 py-1 rounded-full font-semibold">
                           4K Quality
                         </span>
                       </div>
                     </div>
                   </div>
                 </Card>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="left-4 bg-card/80 backdrop-blur-xl border border-border/30 hover:bg-card/90 hover:border-primary/50 hover:shadow-premium transition-all duration-300" />
-          <CarouselNext className="right-4 bg-card/80 backdrop-blur-xl border border-border/30 hover:bg-card/90 hover:border-primary/50 hover:shadow-premium transition-all duration-300" />
-        </Carousel>
-      </div>
-
-      <div className="text-center mt-12 relative z-10">
-        <div className="inline-flex items-center gap-6 text-sm text-muted-foreground bg-card/20 backdrop-blur-xl border border-border/20 rounded-full px-8 py-3">
-          <span className="flex items-center gap-2">
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M13 12L9 8v8l4-4z"/>
-              <path d="M15 12L11 8v8l4-4z"/>
-            </svg>
-            Scroll to explore
-          </span>
-          <div className="w-px h-4 bg-border/50"></div>
-          <span className="flex items-center gap-2">
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M8 5v14l11-7z"/>
-            </svg>
-            Auto-play enabled
-          </span>
+              ))}
+            </div>
+          </div>
+          
+          {/* Scroll indicators */}
+          <div className="flex justify-center mt-8">
+            <div className="flex items-center gap-4 text-sm text-muted-foreground bg-muted/30 rounded-full px-6 py-2">
+              <span className="flex items-center gap-2">
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M13 12L9 8v8l4-4z"/>
+                  <path d="M15 12L11 8v8l4-4z"/>
+                </svg>
+                Scroll horizontally to explore
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </section>

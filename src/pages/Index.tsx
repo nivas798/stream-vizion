@@ -47,20 +47,50 @@ const Index = () => {
       {/* Hero Section */}
       <HeroSection />
 
+      {/* Video Editor Interface Preview */}
+      <section className="py-16 bg-muted/20">
+        <div className="container mx-auto px-4 text-center">
+          <div className="bg-card rounded-2xl shadow-elegant p-8 max-w-6xl mx-auto">
+            <img 
+              src="https://cdn-useast1.kapwing.com/static/video-editor-interface-placeholder.webp" 
+              alt="Video Editor Interface" 
+              className="w-full rounded-lg shadow-premium"
+              onError={(e) => {
+                e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'%3E%3Crect width='800' height='400' fill='%23f3f4f6'/%3E%3Ctext x='400' y='200' text-anchor='middle' font-family='Arial' font-size='20' fill='%236b7280'%3EVideo Editor Interface%3C/text%3E%3C/svg%3E";
+              }}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Studio-quality videos 10x faster section */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              <em className="text-muted-foreground">Studio-quality videos</em> 10x faster
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              StreamVizion's online Video Editor has tools for every experience level
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Main Content */}
       <main className="container mx-auto px-4 py-16 space-y-16">
         
         {/* Video Upload Section */}
-        <section id="upload">
+        <section id="upload" className="py-16">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold font-display mb-4">
-              Upload Your{" "}
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Save hours with{" "}
               <span className="bg-gradient-text bg-clip-text text-transparent">
-                Videos
+                streamlined video editing
               </span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Start by uploading your video files. We support all major formats including MP4, MOV, AVI, and more.
+            <p className="text-lg text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+              StreamVizion is a browser-based Video Editor designed for anyone looking to edit, convert, and export content with ease. Our intuitive tools make tasks like trimming clips and adding overlays straightforward, even for those with no prior editing experience.
             </p>
           </div>
           
@@ -70,15 +100,15 @@ const Index = () => {
         {/* Video Preview & Quality Editor Section */}
         {currentVideo && (
           <>
-            <section id="preview" className="border-t border-border/50 pt-16">
+            <section id="preview" className="border-t border-border pt-16">
               <div className="text-center mb-12">
-                <h2 className="text-4xl font-bold font-display mb-4">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">
                   Preview & Edit{" "}
                   <span className="bg-gradient-text bg-clip-text text-transparent">
                     Quality
                   </span>
                 </h2>
-                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                   Adjust your video settings in real-time and see the changes instantly in the preview player.
                 </p>
               </div>
@@ -91,15 +121,15 @@ const Index = () => {
             </section>
 
             {/* Download Section */}
-            <section id="download" className="border-t border-border/50 pt-16">
+            <section id="download" className="border-t border-border pt-16">
               <div className="text-center mb-12">
-                <h2 className="text-4xl font-bold font-display mb-4">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">
                   Export & Download{" "}
                   <span className="bg-gradient-text bg-clip-text text-transparent">
                     Enhanced Video
                   </span>
                 </h2>
-                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                   Process your enhanced video and download it in your preferred quality and format.
                 </p>
               </div>
@@ -113,52 +143,54 @@ const Index = () => {
           </>
         )}
 
-        {/* Live Streams Section */}
+        {/* Live Streams Section - Under video editing columns */}
         <LiveStreams />
 
         {/* Features Overview */}
-        <section className="py-16">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold font-display mb-4">
-              Powerful Video{" "}
-              <span className="bg-gradient-text bg-clip-text text-transparent">
-                Enhancement Tools
-              </span>
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Professional-grade video editing capabilities right in your browser.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center p-8 bg-card/30 rounded-2xl border border-border/50">
-              <div className="w-16 h-16 bg-gradient-hero rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-white">✨</span>
-              </div>
-              <h3 className="text-xl font-bold font-display mb-2">Real-time Preview</h3>
-              <p className="text-muted-foreground">
-                See your adjustments instantly with our real-time video preview system.
+        <section className="py-16 bg-muted/20 rounded-3xl">
+          <div className="container mx-auto px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Powerful Video{" "}
+                <span className="bg-gradient-text bg-clip-text text-transparent">
+                  Enhancement Tools
+                </span>
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                Professional-grade video editing capabilities right in your browser.
               </p>
             </div>
 
-            <div className="text-center p-8 bg-card/30 rounded-2xl border border-border/50">
-              <div className="w-16 h-16 bg-gradient-hero rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-white">4K</span>
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="text-center p-8 bg-card rounded-2xl border border-border hover:shadow-premium transition-all duration-300">
+                <div className="w-16 h-16 bg-gradient-hero rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <span className="text-2xl">✨</span>
+                </div>
+                <h3 className="text-xl font-bold mb-4">Real-time Preview</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  See your adjustments instantly with our real-time video preview system.
+                </p>
               </div>
-              <h3 className="text-xl font-bold font-display mb-2">Multi-Quality Export</h3>
-              <p className="text-muted-foreground">
-                Export your videos in multiple resolutions from 360p to 4K Ultra HD.
-              </p>
-            </div>
 
-            <div className="text-center p-8 bg-card/30 rounded-2xl border border-border/50">
-              <div className="w-16 h-16 bg-gradient-hero rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-white">⚡</span>
+              <div className="text-center p-8 bg-card rounded-2xl border border-border hover:shadow-premium transition-all duration-300">
+                <div className="w-16 h-16 bg-gradient-hero rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <span className="text-xl font-bold text-white">4K</span>
+                </div>
+                <h3 className="text-xl font-bold mb-4">Multi-Quality Export</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Export your videos in multiple resolutions from 360p to 4K Ultra HD.
+                </p>
               </div>
-              <h3 className="text-xl font-bold font-display mb-2">Fast Processing</h3>
-              <p className="text-muted-foreground">
-                Advanced algorithms ensure quick processing without compromising quality.
-              </p>
+
+              <div className="text-center p-8 bg-card rounded-2xl border border-border hover:shadow-premium transition-all duration-300">
+                <div className="w-16 h-16 bg-gradient-hero rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <span className="text-2xl">⚡</span>
+                </div>
+                <h3 className="text-xl font-bold mb-4">Fast Processing</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Advanced algorithms ensure quick processing without compromising quality.
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -168,50 +200,50 @@ const Index = () => {
       <AboutSection />
 
       {/* Footer */}
-      <footer className="bg-card/50 backdrop-blur-sm border-t border-border/50 py-12">
+      <footer className="bg-card border-t border-border py-16">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
-              <h3 className="text-xl font-bold font-display mb-4 bg-gradient-text bg-clip-text text-transparent">
+              <h3 className="text-xl font-bold mb-4">
                 StreamVizion
               </h3>
-              <p className="text-muted-foreground">
-                Professional video enhancement and quality editing platform for creators.
+              <p className="text-muted-foreground leading-relaxed">
+                Professional video enhancement and quality editing platform for creators everywhere.
               </p>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Features</h4>
-              <ul className="space-y-2 text-muted-foreground">
-                <li>Video Upload</li>
-                <li>Real-time Preview</li>
-                <li>Quality Enhancement</li>
-                <li>Multi-format Export</li>
+              <h4 className="font-semibold mb-4 text-foreground">Features</h4>
+              <ul className="space-y-3 text-muted-foreground">
+                <li className="hover:text-foreground transition-colors cursor-pointer">Video Upload</li>
+                <li className="hover:text-foreground transition-colors cursor-pointer">Real-time Preview</li>
+                <li className="hover:text-foreground transition-colors cursor-pointer">Quality Enhancement</li>
+                <li className="hover:text-foreground transition-colors cursor-pointer">Multi-format Export</li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Export Options</h4>
-              <ul className="space-y-2 text-muted-foreground">
-                <li>4K Ultra HD</li>
-                <li>1080p Full HD</li>
-                <li>720p HD</li>
-                <li>Multiple Formats</li>
+              <h4 className="font-semibold mb-4 text-foreground">Export Options</h4>
+              <ul className="space-y-3 text-muted-foreground">
+                <li className="hover:text-foreground transition-colors cursor-pointer">4K Ultra HD</li>
+                <li className="hover:text-foreground transition-colors cursor-pointer">1080p Full HD</li>
+                <li className="hover:text-foreground transition-colors cursor-pointer">720p HD</li>
+                <li className="hover:text-foreground transition-colors cursor-pointer">Multiple Formats</li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Support</h4>
-              <ul className="space-y-2 text-muted-foreground">
-                <li>Help Center</li>
-                <li>Video Tutorials</li>
-                <li>Format Support</li>
-                <li>Contact Us</li>
+              <h4 className="font-semibold mb-4 text-foreground">Support</h4>
+              <ul className="space-y-3 text-muted-foreground">
+                <li className="hover:text-foreground transition-colors cursor-pointer">Help Center</li>
+                <li className="hover:text-foreground transition-colors cursor-pointer">Video Tutorials</li>
+                <li className="hover:text-foreground transition-colors cursor-pointer">Format Support</li>
+                <li className="hover:text-foreground transition-colors cursor-pointer">Contact Us</li>
               </ul>
             </div>
           </div>
           
-          <div className="border-t border-border/50 mt-8 pt-8 text-center text-muted-foreground">
+          <div className="border-t border-border mt-12 pt-8 text-center text-muted-foreground">
             <p>&copy; 2024 StreamVizion. Built with ❤️ by Nivas, Swathi & Krishna Priya.</p>
           </div>
         </div>
