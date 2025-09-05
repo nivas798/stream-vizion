@@ -8,54 +8,58 @@ All colors MUST be HSL for perfect theming.
 
 @layer base {
   :root {
-    /* Flowing gradient theme inspired by dynamic waves */
-    --background: 240 20% 6%;
-    --foreground: 240 5% 96%;
+    /* Premium Professional Color Palette */
+    --background: 240 15% 4%;
+    --foreground: 240 8% 98%;
 
-    --card: 240 18% 8%;
-    --card-foreground: 240 5% 96%;
+    --card: 240 12% 6%;
+    --card-foreground: 240 8% 98%;
 
-    --popover: 240 18% 8%;
-    --popover-foreground: 240 5% 96%;
+    --popover: 240 12% 6%;
+    --popover-foreground: 240 8% 98%;
 
-    /* Primary flowing blues and purples */
-    --primary: 250 100% 70%;
-    --primary-foreground: 240 20% 6%;
+    /* Elite gradient blues and purples */
+    --primary: 245 100% 65%;
+    --primary-foreground: 240 15% 4%;
 
-    --secondary: 260 80% 60%;
-    --secondary-foreground: 240 5% 96%;
+    --secondary: 265 85% 58%;
+    --secondary-foreground: 240 8% 98%;
 
-    --muted: 240 15% 15%;
-    --muted-foreground: 240 5% 70%;
+    --muted: 240 12% 12%;
+    --muted-foreground: 240 8% 75%;
 
-    --accent: 280 100% 75%;
-    --accent-foreground: 240 20% 6%;
+    --accent: 285 100% 68%;
+    --accent-foreground: 240 15% 4%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 15% 18%;
-    --input: 240 15% 18%;
-    --ring: 250 100% 70%;
+    --border: 240 12% 15%;
+    --input: 240 12% 15%;
+    --ring: 245 100% 65%;
 
-    /* Dynamic flowing gradient system */
-    --flow-blue: 220 100% 60%;
-    --flow-purple: 260 100% 70%;
-    --flow-magenta: 300 100% 75%;
-    --deep-purple: 240 20% 6%;
+    /* Premium gradient system */
+    --flow-blue: 210 100% 65%;
+    --flow-purple: 265 100% 68%;
+    --flow-magenta: 300 100% 72%;
+    --flow-cyan: 185 100% 62%;
+    --flow-emerald: 155 100% 55%;
+    --deep-navy: 240 15% 4%;
     
-    /* Hero and background gradients matching the uploaded theme */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--deep-purple)), hsl(var(--flow-purple) / 0.3), hsl(var(--flow-blue) / 0.2));
-    --gradient-card: linear-gradient(135deg, hsl(var(--card) / 0.9), hsl(var(--secondary) / 0.1));
-    --gradient-overlay: linear-gradient(180deg, transparent 0%, hsl(var(--background) / 0.8) 100%);
-    --gradient-text: linear-gradient(135deg, hsl(var(--flow-blue)), hsl(var(--flow-magenta)));
+    /* Premium gradient system */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--deep-navy)), hsl(var(--flow-purple) / 0.4), hsl(var(--flow-cyan) / 0.3));
+    --gradient-card: linear-gradient(135deg, hsl(var(--card) / 0.95), hsl(var(--flow-blue) / 0.08));
+    --gradient-overlay: linear-gradient(180deg, transparent 0%, hsl(var(--background) / 0.9) 100%);
+    --gradient-text: linear-gradient(135deg, hsl(var(--flow-cyan)), hsl(var(--flow-purple)), hsl(var(--flow-magenta)));
     --gradient-primary: linear-gradient(135deg, hsl(var(--flow-blue)), hsl(var(--flow-purple)), hsl(var(--flow-magenta)));
-    --gradient-wave: linear-gradient(45deg, hsl(var(--flow-blue) / 0.8), hsl(var(--flow-purple) / 0.6), hsl(var(--flow-magenta) / 0.4));
+    --gradient-premium: linear-gradient(135deg, hsl(var(--flow-cyan)), hsl(var(--flow-blue)), hsl(var(--flow-purple)));
+    --gradient-elegant: linear-gradient(135deg, hsl(var(--flow-emerald) / 0.6), hsl(var(--flow-cyan) / 0.7), hsl(var(--flow-blue) / 0.8));
 
-    /* Flowing shadows and glows */
-    --shadow-netflix: 0 25px 50px -12px hsl(var(--flow-purple) / 0.4);
-    --shadow-card: 0 15px 35px -10px hsl(var(--flow-purple) / 0.3);
-    --shadow-glow: 0 0 60px hsl(var(--flow-blue) / 0.5);
+    /* Professional shadows and effects */
+    --shadow-elegant: 0 32px 64px -12px hsl(var(--flow-purple) / 0.35);
+    --shadow-premium: 0 20px 40px -8px hsl(var(--flow-blue) / 0.25);
+    --shadow-glow: 0 0 80px hsl(var(--flow-cyan) / 0.4);
+    --shadow-card-hover: 0 25px 50px -12px hsl(var(--flow-purple) / 0.5);
 
     /* Smooth flowing transitions */
     --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);

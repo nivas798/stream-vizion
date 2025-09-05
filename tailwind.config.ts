@@ -68,11 +68,14 @@ export default {
 				'gradient-card': 'var(--gradient-card)',
 				'gradient-overlay': 'var(--gradient-overlay)',
 				'gradient-text': 'var(--gradient-text)',
+				'gradient-premium': 'var(--gradient-premium)',
+				'gradient-elegant': 'var(--gradient-elegant)',
 			},
 			boxShadow: {
-				'netflix': 'var(--shadow-netflix)',
-				'card-hover': 'var(--shadow-card)',
+				'elegant': 'var(--shadow-elegant)',
+				'premium': 'var(--shadow-premium)',
 				'glow': 'var(--shadow-glow)',
+				'card-hover': 'var(--shadow-card-hover)',
 			},
 			transitionTimingFunction: {
 				'smooth': 'var(--transition-smooth)',
