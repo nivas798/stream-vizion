@@ -32,48 +32,28 @@ const Header = () => {
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8 animate-slide-in-left">
-            <div className="relative group">
-              <button className="flex items-center text-muted-foreground hover:text-primary transition-all duration-300 font-medium">
-                Pro Tools
-                <ChevronDown className="w-4 h-4 ml-1 group-hover:rotate-180 transition-transform duration-300" />
-              </button>
-              <div className="absolute top-full left-0 mt-2 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-300">
-                <div className="bg-card/95 backdrop-blur-xl border border-primary/20 rounded-xl p-4 min-w-[200px] shadow-red-intense">
-                  <div className="space-y-2">
-                    <a href="#" className="block text-sm text-muted-foreground hover:text-primary transition-colors">Video Enhancer</a>
-                    <a href="#" className="block text-sm text-muted-foreground hover:text-primary transition-colors">AI Upscaler</a>
-                    <a href="#" className="block text-sm text-muted-foreground hover:text-primary transition-colors">Format Converter</a>
-                    <a href="#" className="block text-sm text-muted-foreground hover:text-primary transition-colors">Batch Processor</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <button className="text-muted-foreground hover:text-primary transition-all duration-300 font-medium hover:scale-105">
-              AI Studio
+            <button 
+              onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+              className="text-muted-foreground hover:text-primary transition-all duration-300 font-medium hover:scale-105"
+            >
+              About
             </button>
-            <button className="text-muted-foreground hover:text-primary transition-all duration-300 font-medium hover:scale-105">
-              Enterprise
+            <button 
+              onClick={() => document.getElementById('upload')?.scrollIntoView({ behavior: 'smooth' })}
+              className="text-muted-foreground hover:text-primary transition-all duration-300 font-medium hover:scale-105"
+            >
+              Upload
             </button>
-            <button className="text-muted-foreground hover:text-primary transition-all duration-300 font-medium hover:scale-105">
-              Academy
-            </button>
-            <button className="text-muted-foreground hover:text-primary transition-all duration-300 font-medium hover:scale-105">
-              Pricing
+            <button 
+              onClick={() => document.getElementById('live-streams')?.scrollIntoView({ behavior: 'smooth' })}
+              className="text-muted-foreground hover:text-primary transition-all duration-300 font-medium hover:scale-105"
+            >
+              Live Streams
             </button>
           </nav>
 
           {/* Right side actions */}
           <div className="flex items-center space-x-4 animate-slide-in-right">
-            <Button variant="ghost" className="hidden lg:inline-flex text-muted-foreground hover:text-primary font-medium">
-              Book Demo
-            </Button>
-            <Button variant="ghost" className="hidden md:inline-flex text-muted-foreground hover:text-primary font-medium">
-              Sign In
-            </Button>
-            <Button className="bg-gradient-hero hover:shadow-glow transition-all duration-500 font-cinematic font-bold group">
-              <Sparkles className="w-4 h-4 mr-2 group-hover:animate-spin transition-transform duration-300" />
-              Try Free
-            </Button>
             
             {/* Mobile menu button */}
             <button
@@ -89,16 +69,33 @@ const Header = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden py-6 border-t border-primary/20 animate-fade-in-up">
             <nav className="flex flex-col space-y-4">
-              <button className="text-left text-muted-foreground hover:text-primary transition-colors font-medium">Pro Tools</button>
-              <button className="text-left text-muted-foreground hover:text-primary transition-colors font-medium">AI Studio</button>
-              <button className="text-left text-muted-foreground hover:text-primary transition-colors font-medium">Enterprise</button>
-              <button className="text-left text-muted-foreground hover:text-primary transition-colors font-medium">Academy</button>
-              <button className="text-left text-muted-foreground hover:text-primary transition-colors font-medium">Pricing</button>
-              <div className="pt-4 border-t border-primary/20">
-                <Button variant="ghost" className="justify-start w-full mb-2">Book Demo</Button>
-                <Button variant="ghost" className="justify-start w-full mb-4">Sign In</Button>
-                <Button className="bg-gradient-hero w-full font-cinematic">Try Free</Button>
-              </div>
+              <button 
+                onClick={() => {
+                  document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+                  setIsMobileMenuOpen(false);
+                }}
+                className="text-left text-muted-foreground hover:text-primary transition-colors font-medium"
+              >
+                About
+              </button>
+              <button 
+                onClick={() => {
+                  document.getElementById('upload')?.scrollIntoView({ behavior: 'smooth' });
+                  setIsMobileMenuOpen(false);
+                }}
+                className="text-left text-muted-foreground hover:text-primary transition-colors font-medium"
+              >
+                Upload
+              </button>
+              <button 
+                onClick={() => {
+                  document.getElementById('live-streams')?.scrollIntoView({ behavior: 'smooth' });
+                  setIsMobileMenuOpen(false);
+                }}
+                className="text-left text-muted-foreground hover:text-primary transition-colors font-medium"
+              >
+                Live Streams
+              </button>
             </nav>
           </div>
         )}

@@ -4,7 +4,7 @@ import HeroSection from "@/components/HeroSection";
 import VideoUpload from "@/components/VideoUpload";
 import VideoPreview from "@/components/VideoPreview";
 import VideoDownload from "@/components/VideoDownload";
-import AboutSection from "@/components/AboutSection";
+import AboutWebsite from "@/components/AboutWebsite";
 import LiveStreams from "@/components/YouTubeLiveStreams";
 import { Badge } from "@/components/ui/badge";
 import { Play, Zap, Shield, Globe, Users } from "lucide-react";
@@ -48,6 +48,9 @@ const Index = () => {
 
       {/* Hero Section */}
       <HeroSection />
+
+      {/* About Section */}
+      <AboutWebsite />
 
       {/* Video Editor Interface Preview */}
       <section className="py-20 bg-gradient-elegant relative overflow-hidden animate-fade-in-up" style={{animationDelay: '0.2s'}}>
@@ -343,8 +346,6 @@ const Index = () => {
         </section>
       </main>
 
-      {/* About Section */}
-      <AboutSection />
 
       {/* Footer */}
       <footer className="bg-card border-t border-border py-16">

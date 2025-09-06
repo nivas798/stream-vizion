@@ -45,6 +45,7 @@ const HeroSection = () => {
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 animate-fade-in-up" style={{animationDelay: '0.3s'}}>
             <Button 
               size="lg" 
+              onClick={() => document.getElementById('upload')?.scrollIntoView({ behavior: 'smooth' })}
               className="bg-gradient-hero hover:shadow-glow transition-all duration-500 text-xl px-12 py-8 rounded-2xl font-cinematic font-bold group"
             >
               <Zap className="w-6 h-6 mr-3 group-hover:animate-spin transition-transform duration-300" />
