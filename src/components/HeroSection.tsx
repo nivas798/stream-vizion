@@ -1,14 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Zap, Shield, Globe } from "lucide-react";
+import ParticleBackground from "./ParticleBackground";
 
 const HeroSection = () => {
   return (
     <section className="pt-32 pb-20 bg-gradient-hero relative overflow-hidden">
-      {/* Animated background elements */}
+      {/* Professional particle background */}
+      <ParticleBackground />
+      
+      {/* Subtle animated elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-gradient-primary opacity-20 rounded-full blur-3xl animate-floating"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-48 h-48 bg-gradient-premium opacity-15 rounded-full blur-3xl animate-floating" style={{animationDelay: '2s'}}></div>
-        <div className="absolute top-1/2 left-3/4 w-24 h-24 bg-primary opacity-25 rounded-full blur-2xl animate-floating" style={{animationDelay: '4s'}}></div>
+        <div className="absolute top-1/4 left-1/4 w-24 h-24 bg-gradient-primary opacity-10 rounded-full blur-2xl animate-particle-float"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-32 h-32 bg-gradient-premium opacity-8 rounded-full blur-2xl animate-particle-float" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-1/2 left-3/4 w-16 h-16 bg-primary opacity-12 rounded-full blur-xl animate-particle-float" style={{animationDelay: '4s'}}></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -41,7 +45,7 @@ const HeroSection = () => {
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 animate-fade-in-up" style={{animationDelay: '0.3s'}}>
             <Button 
               size="lg" 
-              className="bg-gradient-hero hover:shadow-red-intense transition-all duration-500 text-xl px-12 py-8 rounded-2xl font-cinematic font-bold animate-red-pulse group"
+              className="bg-gradient-hero hover:shadow-glow transition-all duration-500 text-xl px-12 py-8 rounded-2xl font-cinematic font-bold group"
             >
               <Zap className="w-6 h-6 mr-3 group-hover:animate-spin transition-transform duration-300" />
               Start Creating
@@ -60,14 +64,13 @@ const HeroSection = () => {
           {/* Trust Indicators */}
           <div className="animate-fade-in-up" style={{animationDelay: '0.6s'}}>
             <p className="text-sm text-muted-foreground mb-6 font-cinematic tracking-wider">
-              TRUSTED BY INDUSTRY LEADERS
+              TRUSTED BY PROFESSIONALS
             </p>
-            <div className="flex flex-wrap justify-center items-center gap-12 opacity-70">
-              <div className="text-2xl font-bold text-foreground hover:text-primary transition-colors cursor-pointer">Netflix</div>
-              <div className="text-2xl font-bold text-foreground hover:text-primary transition-colors cursor-pointer">Disney+</div>
-              <div className="text-2xl font-bold text-foreground hover:text-primary transition-colors cursor-pointer">YouTube</div>
-              <div className="text-2xl font-bold text-foreground hover:text-primary transition-colors cursor-pointer">Adobe</div>
-              <div className="text-2xl font-bold text-foreground hover:text-primary transition-colors cursor-pointer">Sony</div>
+            <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
+              <div className="text-lg font-medium text-foreground hover:text-primary transition-colors cursor-pointer">Adobe</div>
+              <div className="text-lg font-medium text-foreground hover:text-primary transition-colors cursor-pointer">Canva</div>
+              <div className="text-lg font-medium text-foreground hover:text-primary transition-colors cursor-pointer">Final Cut</div>
+              <div className="text-lg font-medium text-foreground hover:text-primary transition-colors cursor-pointer">DaVinci</div>
             </div>
           </div>
 

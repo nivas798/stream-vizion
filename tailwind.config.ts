@@ -78,7 +78,7 @@ export default {
 				'premium': 'var(--shadow-premium)',
 				'glow': 'var(--shadow-glow)',
 				'card-hover': 'var(--shadow-card-hover)',
-				'red-intense': 'var(--shadow-red-intense)',
+				'red-subtle': 'var(--shadow-red-subtle)',
 			},
 			transitionTimingFunction: {
 				'smooth': 'var(--transition-smooth)',

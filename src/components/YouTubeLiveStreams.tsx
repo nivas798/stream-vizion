@@ -102,7 +102,7 @@ const LiveStreams = () => {
           <div className="overflow-x-auto scrollbar-hide">
             <div className="flex gap-8 pb-6" style={{ width: 'max-content' }}>
               {streamVideos.map((video, index) => (
-                <Card key={video.id} className="flex-shrink-0 w-96 overflow-hidden bg-gradient-card backdrop-blur-xl border border-primary/20 hover:shadow-red-intense transition-all duration-700 group animate-floating">
+                <Card key={video.id} className="flex-shrink-0 w-96 overflow-hidden bg-gradient-card backdrop-blur-xl border border-primary/20 hover:shadow-glow transition-all duration-700 group">
                   <div className="relative">
                     <div className="absolute top-4 left-4 z-20 flex gap-2">
                       <Badge className="bg-gradient-primary text-white border-none shadow-elegant font-cinematic">
@@ -112,7 +112,7 @@ const LiveStreams = () => {
                     </div>
                     
                     <div className="absolute top-4 right-4 z-20">
-                      <Badge className="bg-gradient-to-r from-red-600 to-red-500 text-white border-none animate-red-pulse shadow-red-intense font-bold">
+                      <Badge className="bg-gradient-to-r from-red-600 to-red-500 text-white border-none shadow-red-subtle font-bold">
                         <div className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></div>
                         {video.duration}
                       </Badge>

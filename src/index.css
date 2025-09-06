@@ -56,12 +56,12 @@ Dramatic video editor interface with motion graphics
     --gradient-elegant: linear-gradient(135deg, hsl(var(--charcoal)), hsl(var(--dark-red) / 0.5));
     --gradient-motion: linear-gradient(90deg, hsl(var(--deep-black)), hsl(var(--dark-red)), hsl(var(--bright-red)), hsl(var(--fire-red)));
 
-    /* Cinematic shadows and effects */
-    --shadow-elegant: 0 32px 64px -12px hsl(var(--bright-red) / 0.4);
-    --shadow-premium: 0 20px 40px -8px hsl(var(--crimson) / 0.3);
-    --shadow-glow: 0 0 80px hsl(var(--bright-red) / 0.6);
-    --shadow-card-hover: 0 25px 50px -12px hsl(var(--bright-red) / 0.5);
-    --shadow-red-intense: 0 0 100px hsl(var(--bright-red) / 0.8);
+    /* Professional shadows and effects - Medium intensity */
+    --shadow-elegant: 0 16px 32px -8px hsl(var(--bright-red) / 0.15);
+    --shadow-premium: 0 12px 24px -6px hsl(var(--crimson) / 0.12);
+    --shadow-glow: 0 0 40px hsl(var(--bright-red) / 0.25);
+    --shadow-card-hover: 0 16px 32px -8px hsl(var(--bright-red) / 0.2);
+    --shadow-red-subtle: 0 0 20px hsl(var(--bright-red) / 0.15);
 
     /* Smooth cinematic transitions */
     --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -176,7 +176,41 @@ Dramatic video editor interface with motion graphics
       transform: translateY(0px) rotate(0deg);
     }
     50% {
-      transform: translateY(-20px) rotate(5deg);
+      transform: translateY(-15px) rotate(2deg);
+    }
+  }
+
+  @keyframes particleFloat {
+    0%, 100% {
+      transform: translateY(0px) translateX(0px);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translateY(-30px) translateX(20px);
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes particleDrift {
+    0% {
+      transform: translateX(-100px) translateY(20px);
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.4;
+    }
+    100% {
+      transform: translateX(100vw) translateY(-20px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes gentlePulse {
+    0%, 100% {
+      box-shadow: 0 0 10px hsl(var(--bright-red) / 0.2);
+    }
+    50% {
+      box-shadow: 0 0 25px hsl(var(--bright-red) / 0.4);
     }
   }
 
@@ -197,7 +231,15 @@ Dramatic video editor interface with motion graphics
   }
 
   .animate-red-pulse {
-    animation: redPulse 2s ease-in-out infinite;
+    animation: gentlePulse 3s ease-in-out infinite;
+  }
+
+  .animate-particle-float {
+    animation: particleFloat 8s ease-in-out infinite;
+  }
+
+  .animate-particle-drift {
+    animation: particleDrift 15s linear infinite;
   }
 
   .animate-slide-in-left {
@@ -214,7 +256,26 @@ Dramatic video editor interface with motion graphics
 
   .animate-gradient-shift {
     background-size: 200% 200%;
-    animation: redGradientShift 4s ease infinite;
+    animation: redGradientShift 6s ease infinite;
+  }
+
+  /* Professional particle system */
+  .particles-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(2px 2px at 20px 30px, hsl(var(--primary) / 0.3), transparent),
+      radial-gradient(2px 2px at 40px 70px, hsl(var(--accent) / 0.2), transparent),
+      radial-gradient(1px 1px at 90px 40px, hsl(var(--primary) / 0.4), transparent),
+      radial-gradient(1px 1px at 130px 80px, hsl(var(--accent) / 0.3), transparent),
+      radial-gradient(2px 2px at 160px 30px, hsl(var(--primary) / 0.2), transparent);
+    background-size: 200px 100px;
+    animation: particleDrift 20s linear infinite;
+    pointer-events: none;
   }
 }
 

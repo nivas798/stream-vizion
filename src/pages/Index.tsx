@@ -58,7 +58,7 @@ const Index = () => {
         </div>
         
         <div className="container mx-auto px-4 text-center relative z-10">
-          <div className="bg-gradient-card backdrop-blur-xl border border-primary/20 rounded-3xl shadow-red-intense p-12 max-w-7xl mx-auto animate-red-pulse">
+          <div className="bg-gradient-card backdrop-blur-xl border border-primary/20 rounded-3xl shadow-elegant p-12 max-w-7xl mx-auto">
             <div className="mb-8">
               <Badge className="bg-gradient-primary text-white px-6 py-2 font-cinematic font-bold mb-4">
                 PROFESSIONAL INTERFACE
@@ -251,7 +251,7 @@ const Index = () => {
         <LiveStreams />
 
         {/* Features Overview */}
-        <section className="py-24 bg-gradient-card rounded-3xl border border-primary/20 shadow-red-intense animate-fade-in-up" style={{animationDelay: '0.2s'}}>
+        <section className="py-24 bg-gradient-card rounded-3xl border border-primary/20 shadow-elegant animate-fade-in-up" style={{animationDelay: '0.2s'}}>
           <div className="container mx-auto px-8">
             <div className="text-center mb-20">
               <Badge className="bg-gradient-primary/20 text-primary border border-primary/30 px-6 py-2 font-cinematic mb-6">
@@ -270,8 +270,8 @@ const Index = () => {
             </div>
 
             <div className="grid lg:grid-cols-3 gap-8">
-              <div className="text-center p-8 bg-gradient-elegant backdrop-blur-sm rounded-2xl border border-primary/20 hover:shadow-red-intense transition-all duration-500 group animate-floating">
-                <div className="w-20 h-20 bg-gradient-primary rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:animate-red-pulse">
+              <div className="text-center p-8 bg-gradient-elegant backdrop-blur-sm rounded-2xl border border-primary/20 hover:shadow-glow transition-all duration-500 group">
+                <div className="w-20 h-20 bg-gradient-primary rounded-3xl flex items-center justify-center mx-auto mb-6">
                   <span className="text-3xl">✨</span>
                 </div>
                 <h3 className="text-xl font-bold font-cinematic mb-4 group-hover:bg-gradient-text group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
@@ -285,8 +285,8 @@ const Index = () => {
                 </div>
               </div>
 
-              <div className="text-center p-8 bg-gradient-elegant backdrop-blur-sm rounded-2xl border border-primary/20 hover:shadow-red-intense transition-all duration-500 group animate-floating" style={{animationDelay: '2s'}}>
-                <div className="w-20 h-20 bg-gradient-primary rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:animate-red-pulse">
+              <div className="text-center p-8 bg-gradient-elegant backdrop-blur-sm rounded-2xl border border-primary/20 hover:shadow-glow transition-all duration-500 group">
+                <div className="w-20 h-20 bg-gradient-primary rounded-3xl flex items-center justify-center mx-auto mb-6">
                   <span className="text-2xl font-bold text-white">8K</span>
                 </div>
                 <h3 className="text-xl font-bold font-cinematic mb-4 group-hover:bg-gradient-text group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
@@ -300,8 +300,8 @@ const Index = () => {
                 </div>
               </div>
 
-              <div className="text-center p-8 bg-gradient-elegant backdrop-blur-sm rounded-2xl border border-primary/20 hover:shadow-red-intense transition-all duration-500 group animate-floating" style={{animationDelay: '4s'}}>
-                <div className="w-20 h-20 bg-gradient-primary rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:animate-red-pulse">
+              <div className="text-center p-8 bg-gradient-elegant backdrop-blur-sm rounded-2xl border border-primary/20 hover:shadow-glow transition-all duration-500 group">
+                <div className="w-20 h-20 bg-gradient-primary rounded-3xl flex items-center justify-center mx-auto mb-6">
                   <span className="text-3xl">⚡</span>
                 </div>
                 <h3 className="text-xl font-bold font-cinematic mb-4 group-hover:bg-gradient-text group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">

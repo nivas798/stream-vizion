@@ -70,7 +70,7 @@ const Header = () => {
             <Button variant="ghost" className="hidden md:inline-flex text-muted-foreground hover:text-primary font-medium">
               Sign In
             </Button>
-            <Button className="bg-gradient-hero hover:shadow-red-intense transition-all duration-500 font-cinematic font-bold animate-red-pulse group">
+            <Button className="bg-gradient-hero hover:shadow-glow transition-all duration-500 font-cinematic font-bold group">
               <Sparkles className="w-4 h-4 mr-2 group-hover:animate-spin transition-transform duration-300" />
               Try Free
             </Button>
