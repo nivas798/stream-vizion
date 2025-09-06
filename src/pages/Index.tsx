@@ -123,35 +123,35 @@ const Index = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-20">
             <Badge className="bg-card/20 text-primary border border-primary/30 px-6 py-2 font-cinematic mb-6 animate-red-pulse">
-              STUDENT-FRIENDLY TECHNOLOGY
+              REVOLUTIONARY TECHNOLOGY
             </Badge>
             <h2 className="text-4xl md:text-6xl font-bold font-cinematic mb-8 animate-slide-in-left">
-              <em className="text-muted-foreground font-light">Assignment-ready videos</em>{" "}
-              <span className="bg-gradient-text bg-clip-text text-transparent">in minutes</span>
+              <em className="text-muted-foreground font-light">Studio-quality videos</em>{" "}
+              <span className="bg-gradient-text bg-clip-text text-transparent">10x faster</span>
             </h2>
             <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto font-inter animate-slide-in-right">
-              EduVision's easy-to-use Video Editor helps students create amazing presentations and projects 
-              with simple tools designed specifically for academic needs.
+              StreamVizion's AI-powered Video Editor revolutionizes content creation with tools designed for professionals, 
+              creators, and businesses of every scale.
             </p>
           </div>
 
           {/* Stats */}
           <div className="grid md:grid-cols-4 gap-8 mb-16">
             <div className="text-center animate-fade-in-up" style={{animationDelay: '0.6s'}}>
-              <div className="text-4xl font-bold font-cinematic text-primary mb-2">500+</div>
-              <div className="text-sm text-muted-foreground font-inter">Student Projects</div>
+              <div className="text-4xl font-bold font-cinematic text-primary mb-2">10M+</div>
+              <div className="text-sm text-muted-foreground font-inter">Videos Processed</div>
             </div>
             <div className="text-center animate-fade-in-up" style={{animationDelay: '0.7s'}}>
-              <div className="text-4xl font-bold font-cinematic text-primary mb-2">25+</div>
-              <div className="text-sm text-muted-foreground font-inter">Universities</div>
+              <div className="text-4xl font-bold font-cinematic text-primary mb-2">50K+</div>
+              <div className="text-sm text-muted-foreground font-inter">Active Creators</div>
             </div>
             <div className="text-center animate-fade-in-up" style={{animationDelay: '0.8s'}}>
-              <div className="text-4xl font-bold font-cinematic text-primary mb-2">95%</div>
-              <div className="text-sm text-muted-foreground font-inter">Satisfaction Rate</div>
+              <div className="text-4xl font-bold font-cinematic text-primary mb-2">99.9%</div>
+              <div className="text-sm text-muted-foreground font-inter">Uptime Guarantee</div>
             </div>
             <div className="text-center animate-fade-in-up" style={{animationDelay: '0.9s'}}>
-              <div className="text-4xl font-bold font-cinematic text-primary mb-2">FREE</div>
-              <div className="text-sm text-muted-foreground font-inter">For Students</div>
+              <div className="text-4xl font-bold font-cinematic text-primary mb-2">24/7</div>
+              <div className="text-sm text-muted-foreground font-inter">Expert Support</div>
             </div>
           </div>
         </div>
@@ -167,15 +167,15 @@ const Index = () => {
               UPLOAD & CREATE
             </Badge>
             <h2 className="text-4xl md:text-5xl font-bold font-cinematic mb-6 animate-slide-in-left">
-              Complete assignments with{" "}
+              Save hours with{" "}
               <span className="bg-gradient-text bg-clip-text text-transparent">
-                easy video editing
+                streamlined video editing
               </span>
             </h2>
             <p className="text-lg md:text-xl text-muted-foreground max-w-5xl mx-auto leading-relaxed font-inter animate-slide-in-right">
-              EduVision is a browser-based Video Editor designed specifically for students and academic projects. 
-              Our simple tools make video editing fun and easy, helping you create amazing presentations 
-              and assignments without any technical expertise.
+              StreamVizion is a browser-based Video Editor designed for professionals, content creators, and businesses. 
+              Our AI-powered tools make complex video editing tasks simple and intuitive, enabling you to create 
+              stunning content in minutes, not hours.
             </p>
             
             {/* Additional features */}
