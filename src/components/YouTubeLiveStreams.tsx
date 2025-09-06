@@ -7,43 +7,43 @@ const LiveStreams = () => {
   const streamVideos = [
     {
       id: "hovezwINQMo",
-      title: "Epic 4K Nature Documentary - Wildlife Paradise",
+      title: "Student Project Showcase - Creative Presentations",
       url: "https://www.youtube.com/embed/hovezwINQMo?autoplay=1&mute=1&loop=1&playlist=hovezwINQMo",
-      viewers: "2.4M",
+      viewers: "2.4K",
       duration: "LIVE",
-      category: "Documentary"
+      category: "Academic"
     },
     {
       id: "TPYg7NBo4yY",
-      title: "Cinematic Wildlife Experience - African Safari",
+      title: "Study Group Session - Computer Science Projects",
       url: "https://www.youtube.com/embed/TPYg7NBo4yY?autoplay=1&mute=1&loop=1&playlist=TPYg7NBo4yY",
-      viewers: "1.8M",
+      viewers: "1.8K",
       duration: "LIVE",
-      category: "Adventure"
+      category: "Study Group"
     },
     {
       id: "8f5MGY0r9aA",
-      title: "Deep Ocean 4K Exploration - Marine Life",
+      title: "Final Year Project Defense - Engineering Solutions",
       url: "https://www.youtube.com/embed/8f5MGY0r9aA?autoplay=1&mute=1&loop=1&playlist=8f5MGY0r9aA",
-      viewers: "3.1M",
+      viewers: "3.1K",
       duration: "LIVE",
-      category: "Science"
+      category: "Engineering"
     },
     {
       id: "dqzcQF2Bz7o",
-      title: "Majestic Mountain Landscapes - Aerial Journey",
+      title: "Student Film Festival - Creative Submissions",
       url: "https://www.youtube.com/embed/dqzcQF2Bz7o?autoplay=1&mute=1&loop=1&playlist=dqzcQF2Bz7o",
-      viewers: "1.6M",
+      viewers: "1.6K",
       duration: "LIVE",
-      category: "Travel"
+      category: "Film"
     },
     {
       id: "CU1tFtk_NFY",
-      title: "Tropical Paradise 4K - Crystal Clear Waters",
+      title: "Assignment Help Session - Video Editing Basics",
       url: "https://www.youtube.com/embed/CU1tFtk_NFY?autoplay=1&mute=1&loop=1&playlist=CU1tFtk_NFY",
-      viewers: "2.9M",
+      viewers: "2.9K",
       duration: "LIVE",
-      category: "Travel"
+      category: "Tutorial"
     }
   ];
 
@@ -85,16 +85,16 @@ const LiveStreams = () => {
         <div className="text-center mb-20 animate-fade-in-up">
           <div className="inline-flex items-center gap-3 bg-card/30 backdrop-blur-xl border border-primary/20 rounded-full px-8 py-3 mb-8">
             <div className="w-3 h-3 bg-gradient-primary rounded-full animate-red-pulse"></div>
-            <span className="text-sm font-bold text-primary font-cinematic tracking-wider">PREMIUM 4K COLLECTION</span>
+            <span className="text-sm font-bold text-primary font-cinematic tracking-wider">STUDENT PROJECT COLLECTION</span>
           </div>
           <h2 className="text-4xl md:text-6xl font-bold font-cinematic mb-8">
-            Ultra HD{" "}
+            Student{" "}
             <span className="bg-gradient-text bg-clip-text text-transparent animate-gradient-shift">
-              Live Streaming
+              Live Sessions
             </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed font-inter">
-            Experience cinematic quality with our curated collection of 4K ultra-high definition live streams.
+            Join live study sessions and project showcases from students around the world.
           </p>
         </div>
 
@@ -107,7 +107,7 @@ const LiveStreams = () => {
                     <div className="absolute top-4 left-4 z-20 flex gap-2">
                       <Badge className="bg-gradient-primary text-white border-none shadow-elegant font-cinematic">
                         <Play className="w-3 h-3 mr-2" />
-                        4K ULTRA HD
+                        STUDENT PROJECT
                       </Badge>
                     </div>
                     
@@ -157,7 +157,7 @@ const LiveStreams = () => {
           <div className="flex justify-center mt-12">
             <div className="flex items-center gap-6 text-sm text-muted-foreground bg-card/40 backdrop-blur-xl border border-primary/20 rounded-full px-8 py-4 shadow-elegant">
               <span className="flex items-center gap-3 font-cinematic">
-                Scroll horizontally to explore premium content
+                Scroll horizontally to explore student projects
               </span>
             </div>
           </div>

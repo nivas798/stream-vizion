@@ -21,23 +21,23 @@ const HeroSection = () => {
           <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-8 animate-fade-in-up">
             <span className="font-cinematic">HOME</span>
             <span>&gt;</span>
-            <span className="text-primary font-medium font-cinematic">VIDEO EDITOR</span>
+            <span className="text-primary font-medium font-cinematic">STUDENT PROJECT</span>
           </div>
 
           {/* Main Title */}
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold font-cinematic mb-8 leading-tight tracking-tight animate-slide-in-left">
             <span className="bg-gradient-text bg-clip-text text-transparent animate-gradient-shift">
-              CINEMATIC VIDEO EDITOR
+              STUDENT VIDEO EDITOR
             </span>
           </h1>
 
           {/* Subtitle */}
           <div className="animate-slide-in-right">
             <p className="text-2xl md:text-3xl text-foreground mb-4 font-medium">
-              Transform videos with AI precision.
+              Create amazing videos for your projects.
             </p>
             <p className="text-lg md:text-xl text-muted-foreground mb-12 font-inter">
-              Professional-grade editing tools. Zero downloads required.
+              Easy-to-use editing tools perfect for assignments and presentations.
             </p>
           </div>
 
@@ -48,7 +48,7 @@ const HeroSection = () => {
               className="bg-gradient-hero hover:shadow-glow transition-all duration-500 text-xl px-12 py-8 rounded-2xl font-cinematic font-bold group"
             >
               <Zap className="w-6 h-6 mr-3 group-hover:animate-spin transition-transform duration-300" />
-              Start Creating
+              Start My Project
               <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
             </Button>
             
@@ -57,20 +57,20 @@ const HeroSection = () => {
               size="lg"
               className="border-2 border-primary/50 text-primary hover:bg-primary/10 text-lg px-10 py-8 rounded-2xl font-medium backdrop-blur-sm"
             >
-              Watch Demo
+              View Examples
             </Button>
           </div>
 
           {/* Trust Indicators */}
           <div className="animate-fade-in-up" style={{animationDelay: '0.6s'}}>
             <p className="text-sm text-muted-foreground mb-6 font-cinematic tracking-wider">
-              TRUSTED BY PROFESSIONALS
+              TRUSTED BY STUDENTS WORLDWIDE
             </p>
             <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
-              <div className="text-lg font-medium text-foreground hover:text-primary transition-colors cursor-pointer">Adobe</div>
-              <div className="text-lg font-medium text-foreground hover:text-primary transition-colors cursor-pointer">Canva</div>
-              <div className="text-lg font-medium text-foreground hover:text-primary transition-colors cursor-pointer">Final Cut</div>
-              <div className="text-lg font-medium text-foreground hover:text-primary transition-colors cursor-pointer">DaVinci</div>
+              <div className="text-lg font-medium text-foreground hover:text-primary transition-colors cursor-pointer">MIT</div>
+              <div className="text-lg font-medium text-foreground hover:text-primary transition-colors cursor-pointer">Stanford</div>
+              <div className="text-lg font-medium text-foreground hover:text-primary transition-colors cursor-pointer">Harvard</div>
+              <div className="text-lg font-medium text-foreground hover:text-primary transition-colors cursor-pointer">Oxford</div>
             </div>
           </div>
 
@@ -78,15 +78,15 @@ const HeroSection = () => {
           <div className="flex flex-wrap justify-center gap-4 mt-16 animate-fade-in-up" style={{animationDelay: '0.9s'}}>
             <div className="flex items-center gap-2 bg-card/50 backdrop-blur-sm border border-primary/20 rounded-full px-6 py-3 hover:shadow-glow transition-all duration-300">
               <Shield className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium">Enterprise Security</span>
+              <span className="text-sm font-medium">Student-Safe</span>
             </div>
             <div className="flex items-center gap-2 bg-card/50 backdrop-blur-sm border border-primary/20 rounded-full px-6 py-3 hover:shadow-glow transition-all duration-300">
               <Zap className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium">AI-Powered</span>
+              <span className="text-sm font-medium">Easy to Use</span>
             </div>
             <div className="flex items-center gap-2 bg-card/50 backdrop-blur-sm border border-primary/20 rounded-full px-6 py-3 hover:shadow-glow transition-all duration-300">
               <Globe className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium">Global CDN</span>
+              <span className="text-sm font-medium">Free Access</span>
             </div>
           </div>
         </div>

@@ -5,10 +5,10 @@ import { Github, Linkedin, Mail, Code, Palette, Database } from "lucide-react";
 const developers = [
   {
     name: "Nivas",
-    role: "Full Stack Developer",
-    specialty: "Backend Architecture & Video Processing",
-    description: "Expert in Node.js, FFmpeg, and streaming technologies. Passionate about building scalable video platforms.",
-    skills: ["Node.js", "FFmpeg", "MongoDB", "Docker", "AWS"],
+    role: "Computer Science Student",
+    specialty: "Full Stack Development & Video Processing",
+    description: "Third-year CS student passionate about web development and multimedia technologies. Loves building innovative solutions for academic projects.",
+    skills: ["React", "Node.js", "MongoDB", "Python", "JavaScript"],
     icon: <Code className="w-6 h-6" />,
     gradient: "from-blue-500 to-purple-600",
     links: {
@@ -19,10 +19,10 @@ const developers = [
   },
   {
     name: "Swathi",
-    role: "Frontend Developer",
-    specialty: "UI/UX & Interactive Design",
-    description: "Specializes in React, modern CSS, and creating beautiful user experiences with attention to detail.",
-    skills: ["React", "TypeScript", "Tailwind", "Figma", "Animation"],
+    role: "Design & Frontend Student",
+    specialty: "UI/UX Design & Interactive Media",
+    description: "Creative student specializing in modern web design and user experience. Enjoys creating beautiful interfaces for student projects.",
+    skills: ["React", "CSS", "Figma", "UI Design", "Animation"],
     icon: <Palette className="w-6 h-6" />,
     gradient: "from-pink-500 to-orange-500",
     links: {
@@ -33,10 +33,10 @@ const developers = [
   },
   {
     name: "Krishna Priya",
-    role: "DevOps Engineer",
-    specialty: "Infrastructure & Performance",
-    description: "Focuses on deployment automation, performance optimization, and ensuring platform reliability.",
-    skills: ["Docker", "Kubernetes", "CI/CD", "Monitoring", "Cloud"],
+    role: "Technology Student",
+    specialty: "System Administration & Cloud Computing",
+    description: "Dedicated student focused on cloud technologies and system optimization. Passionate about making technology accessible to fellow students.",
+    skills: ["Cloud Computing", "Linux", "Git", "Database", "Networking"],
     icon: <Database className="w-6 h-6" />,
     gradient: "from-green-500 to-teal-600",
     links: {
@@ -56,12 +56,12 @@ const AboutSection = () => {
           <h2 className="text-4xl font-bold mb-4">
             Meet Our{" "}
             <span className="bg-gradient-text bg-clip-text text-transparent">
-              Development Team
+              Student Team
             </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Three passionate developers dedicated to revolutionizing the streaming experience 
-            with cutting-edge technology and beautiful design.
+            Three passionate students collaborating to create an amazing video editing platform 
+            for their final year project, combining creativity with cutting-edge technology.
           </p>
         </div>
 
@@ -135,20 +135,20 @@ const AboutSection = () => {
         {/* Team Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border/50">
           <div className="text-center">
-            <div className="text-3xl font-bold text-primary mb-2">3+</div>
-            <div className="text-muted-foreground">Years Experience</div>
+            <div className="text-3xl font-bold text-primary mb-2">2+</div>
+            <div className="text-muted-foreground">Years Learning</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-primary mb-2">50+</div>
-            <div className="text-muted-foreground">Projects Completed</div>
+            <div className="text-3xl font-bold text-primary mb-2">15+</div>
+            <div className="text-muted-foreground">Assignments Done</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-primary mb-2">24/7</div>
-            <div className="text-muted-foreground">Platform Uptime</div>
+            <div className="text-3xl font-bold text-primary mb-2">A+</div>
+            <div className="text-muted-foreground">Target Grade</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-primary mb-2">∞</div>
-            <div className="text-muted-foreground">Streaming Quality</div>
+            <div className="text-3xl font-bold text-primary mb-2">100%</div>
+            <div className="text-muted-foreground">Dedication</div>
           </div>
         </div>
       </div>
