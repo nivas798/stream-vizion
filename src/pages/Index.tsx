@@ -5,6 +5,7 @@ import VideoUpload from "@/components/VideoUpload";
 import VideoPreview from "@/components/VideoPreview";
 import VideoDownload from "@/components/VideoDownload";
 import AboutWebsite from "@/components/AboutWebsite";
+import AboutSection from "@/components/AboutSection";
 import LiveStreams from "@/components/YouTubeLiveStreams";
 import { Badge } from "@/components/ui/badge";
 import { Play, Zap, Shield, Globe, Users } from "lucide-react";
@@ -252,6 +253,9 @@ const Index = () => {
 
         {/* Live Streams Section - Under video editing columns */}
         <LiveStreams />
+
+        {/* Developer Section */}
+        <AboutSection />
 
         {/* Features Overview */}
         <section className="py-24 bg-gradient-card rounded-3xl border border-primary/20 shadow-elegant animate-fade-in-up" style={{animationDelay: '0.2s'}}>
