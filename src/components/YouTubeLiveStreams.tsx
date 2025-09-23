@@ -101,13 +101,16 @@ const LiveStreams = () => {
 
   const handleVideoIntersection = (entries: IntersectionObserverEntry[]) => {
     entries.forEach((entry) => {
-      const video = entry.target as HTMLVideoElement;
-      if (entry.isIntersecting) {
-        video.play().catch(() => {
-          // Auto-play might be blocked
-        });
-      } else {
-        video.pause();
+      const element = entry.target;
+      // Only call play/pause on actual video elements, not iframes
+      if (element instanceof HTMLVideoElement) {
+        if (entry.isIntersecting) {
+          element.play().catch(() => {
+            // Auto-play might be blocked
+          });
+        } else {
+          element.pause();
+        }
       }
     });
   };
@@ -170,9 +173,6 @@ const LiveStreams = () => {
 
                     <div className="aspect-video bg-gradient-hero relative overflow-hidden">
                       <iframe
-                        ref={(el) => {
-                          if (el) videoRefs.current[index] = el as unknown as HTMLVideoElement;
-                        }}
                         src={video.url}
                         title={video.title}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
