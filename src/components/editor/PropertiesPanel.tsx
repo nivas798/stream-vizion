@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -76,6 +76,18 @@ export const PropertiesPanel = ({ selectedTool }: PropertiesPanelProps) => {
   const [bass, setBass] = useState(0);
   const [treble, setTreble] = useState(0);
   const [pitch, setPitch] = useState(0);
+  
+  // Perception-Aware Settings
+  const [perceptionAware, setPerceptionAware] = useState({
+    enabled: true,
+    faceDetection: true,
+    motionTracking: true,
+    textRecognition: true,
+    backgroundCompression: 75,
+    qualityPreservation: 90,
+    adaptiveBitrate: true,
+    realTimeProcessing: false
+  });
   const [audioDelay, setAudioDelay] = useState(0);
 
   const renderBasicControls = () => (
@@ -705,6 +717,177 @@ export const PropertiesPanel = ({ selectedTool }: PropertiesPanelProps) => {
     </Card>
   );
 
+  const renderPerceptionAwareControls = () => (
+    <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-accent/5">
+      <CardHeader className="pb-3">
+        <CardTitle className="text-sm flex items-center gap-2">
+          <div className="w-4 h-4 bg-gradient-primary rounded flex items-center justify-center">
+            <span className="text-white text-xs font-bold">AI</span>
+          </div>
+          Perception-Aware 4K/8K
+          <Badge variant="secondary" className="ml-auto text-xs">PRO</Badge>
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        {/* Enable/Disable Toggle */}
+        <div className="flex items-center justify-between p-3 bg-secondary/20 rounded-lg">
+          <div>
+            <h4 className="font-medium text-sm">Enable AI Enhancement</h4>
+            <p className="text-xs text-muted-foreground">Intelligent compression for 4K/8K output</p>
+          </div>
+          <input
+            type="checkbox"
+            checked={perceptionAware.enabled}
+            onChange={(e) => setPerceptionAware(prev => ({ ...prev, enabled: e.target.checked }))}
+            className="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary"
+          />
+        </div>
+
+        {perceptionAware.enabled && (
+          <>
+            {/* Detection Features */}
+            <div className="space-y-3">
+              <h4 className="font-medium text-sm">Smart Detection</h4>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between p-2 bg-secondary/10 rounded">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm">🎯</span>
+                    <span className="text-sm">Face Detection</span>
+                  </div>
+                  <input
+                    type="checkbox"
+                    checked={perceptionAware.faceDetection}
+                    onChange={(e) => setPerceptionAware(prev => ({ ...prev, faceDetection: e.target.checked }))}
+                    className="w-3 h-3 text-primary"
+                  />
+                </div>
+                <div className="flex items-center justify-between p-2 bg-secondary/10 rounded">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm">🏃</span>
+                    <span className="text-sm">Motion Tracking</span>
+                  </div>
+                  <input
+                    type="checkbox"
+                    checked={perceptionAware.motionTracking}
+                    onChange={(e) => setPerceptionAware(prev => ({ ...prev, motionTracking: e.target.checked }))}
+                    className="w-3 h-3 text-primary"
+                  />
+                </div>
+                <div className="flex items-center justify-between p-2 bg-secondary/10 rounded">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm">📝</span>
+                    <span className="text-sm">Text Recognition</span>
+                  </div>
+                  <input
+                    type="checkbox"
+                    checked={perceptionAware.textRecognition}
+                    onChange={(e) => setPerceptionAware(prev => ({ ...prev, textRecognition: e.target.checked }))}
+                    className="w-3 h-3 text-primary"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Compression Settings */}
+            <div className="space-y-3">
+              <h4 className="font-medium text-sm">Compression Balance</h4>
+              <div className="space-y-3">
+                <div>
+                  <div className="flex justify-between items-center mb-1">
+                    <Label className="text-xs">Background Compression</Label>
+                    <span className="text-xs text-muted-foreground">{perceptionAware.backgroundCompression}%</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="30"
+                    max="90"
+                    value={perceptionAware.backgroundCompression}
+                    onChange={(e) => setPerceptionAware(prev => ({ ...prev, backgroundCompression: Number(e.target.value) }))}
+                    className="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                  />
+                  <p className="text-xs text-muted-foreground mt-1">Higher = more background compression</p>
+                </div>
+
+                <div>
+                  <div className="flex justify-between items-center mb-1">
+                    <Label className="text-xs">Quality Preservation</Label>
+                    <span className="text-xs text-muted-foreground">{perceptionAware.qualityPreservation}%</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="60"
+                    max="100"
+                    value={perceptionAware.qualityPreservation}
+                    onChange={(e) => setPerceptionAware(prev => ({ ...prev, qualityPreservation: Number(e.target.value) }))}
+                    className="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                  />
+                  <p className="text-xs text-muted-foreground mt-1">Quality for important areas</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Advanced Options */}
+            <div className="space-y-3">
+              <h4 className="font-medium text-sm">Advanced Options</h4>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between p-2 bg-secondary/10 rounded">
+                  <div>
+                    <span className="text-sm">Adaptive Bitrate</span>
+                    <p className="text-xs text-muted-foreground">Dynamic quality adjustment</p>
+                  </div>
+                  <input
+                    type="checkbox"
+                    checked={perceptionAware.adaptiveBitrate}
+                    onChange={(e) => setPerceptionAware(prev => ({ ...prev, adaptiveBitrate: e.target.checked }))}
+                    className="w-3 h-3 text-primary"
+                  />
+                </div>
+                <div className="flex items-center justify-between p-2 bg-secondary/10 rounded">
+                  <div>
+                    <span className="text-sm">Real-time Processing</span>
+                    <p className="text-xs text-muted-foreground">Live preview (GPU intensive)</p>
+                  </div>
+                  <input
+                    type="checkbox"
+                    checked={perceptionAware.realTimeProcessing}
+                    onChange={(e) => setPerceptionAware(prev => ({ ...prev, realTimeProcessing: e.target.checked }))}
+                    className="w-3 h-3 text-primary"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Processing Status */}
+            <div className="p-3 bg-gradient-primary/10 rounded-lg border border-primary/20">
+              <div className="flex items-center gap-2 mb-2">
+                <Sparkles className="w-4 h-4 text-primary" />
+                <span className="text-sm font-medium">AI Status</span>
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span>Detection: Active</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                  <span>Processing: Ready</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                  <span>4K/8K: Enabled</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                  <span>Compression: Smart</span>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+      </CardContent>
+    </Card>
+  );
+
   const renderTextControls = () => (
     <Card>
       <CardHeader className="pb-3">
@@ -805,6 +988,8 @@ export const PropertiesPanel = ({ selectedTool }: PropertiesPanelProps) => {
         {selectedTool === 'ai' && renderAIEnhancement()}
 
         {/* Always show color controls for video/image tools */}
+        {selectedTool === 'ai' && renderPerceptionAwareControls()}
+        
         {(selectedTool === 'image' || selectedTool === 'filters') && (
           <>
             {renderColorControls()}

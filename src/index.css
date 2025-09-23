@@ -259,6 +259,18 @@ Dramatic video editor interface with motion graphics
     animation: redGradientShift 6s ease infinite;
   }
 
+  /* Perception-aware processing animations */
+  @keyframes processingPulse {
+    0%, 100% {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  }
+
   /* Professional particle system */
   .particles-bg::before {
     content: '';
@@ -276,6 +288,10 @@ Dramatic video editor interface with motion graphics
     background-size: 200px 100px;
     animation: particleDrift 20s linear infinite;
     pointer-events: none;
+  }
+
+  .animate-processing-pulse {
+    animation: processingPulse 2s ease-in-out infinite;
   }
 }
 

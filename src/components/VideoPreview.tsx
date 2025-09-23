@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
@@ -11,10 +11,23 @@ interface VideoPreviewProps {
 }
 
 interface QualitySettings {
+  // Basic settings
   brightness: number;
   contrast: number;
   saturation: number;
   hue: number;
+}
+
+interface PerceptionSettings {
+  revertCompression: number;
+  recoverDetails: number;
+  sharpen: number;
+  reduceNoise: number;
+  dehalo: number;
+  antialiasDeblur: number;
+  outputSize: string;
+  scalePercentage: number;
+  enablePerceptionAware: boolean;
 }
 
 const VideoPreview = ({ videoUrl, fileName, onQualityChange }: VideoPreviewProps) => {
@@ -30,6 +43,18 @@ const VideoPreview = ({ videoUrl, fileName, onQualityChange }: VideoPreviewProps
     contrast: 100,
     saturation: 100,
     hue: 0
+  });
+
+  const [perceptionSettings, setPerceptionSettings] = useState<PerceptionSettings>({
+    revertCompression: 100,
+    recoverDetails: 75,
+    sharpen: 20,
+    reduceNoise: 70,
+    dehalo: 0,
+    antialiasDeblur: 75,
+    outputSize: "4K",
+    scalePercentage: 200,
+    enablePerceptionAware: true
   });
 
   useEffect(() => {
@@ -60,6 +85,13 @@ const VideoPreview = ({ videoUrl, fileName, onQualityChange }: VideoPreviewProps
     }
     onQualityChange?.(qualitySettings);
   }, [qualitySettings, onQualityChange]);
+
+  const handlePerceptionChange = useCallback((setting: keyof PerceptionSettings, value: number | string | boolean) => {
+    setPerceptionSettings(prev => ({
+      ...prev,
+      [setting]: value
+    }));
+  }, []);
 
   const togglePlay = () => {
     if (!videoRef.current) return;
@@ -127,6 +159,13 @@ const VideoPreview = ({ videoUrl, fileName, onQualityChange }: VideoPreviewProps
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
+
+  const outputSizeOptions = [
+    { value: "4K", label: "4K (3840x2160)", scale: 200 },
+    { value: "8K", label: "8K (7680x4320)", scale: 400 },
+    { value: "2K", label: "2K (2560x1440)", scale: 133 },
+    { value: "1080p", label: "1080p (1920x1080)", scale: 100 }
+  ];
 
   return (
     <div className="space-y-6">
@@ -201,6 +240,216 @@ const VideoPreview = ({ videoUrl, fileName, onQualityChange }: VideoPreviewProps
               </div>
             </div>
           </div>
+        </CardContent>
+      </Card>
+
+      {/* Perception-Aware AI Enhancement */}
+      <Card className="bg-gradient-to-br from-primary/5 to-accent/5 border border-primary/20">
+        <CardContent className="p-6">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">AI</span>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold font-display">Perception-Aware Enhancement</h3>
+                <p className="text-sm text-muted-foreground">Intelligent 4K/8K upscaling with selective compression</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-muted-foreground">Enable AI</span>
+              <input
+                type="checkbox"
+                checked={perceptionSettings.enablePerceptionAware}
+                onChange={(e) => handlePerceptionChange('enablePerceptionAware', e.target.checked)}
+                className="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary"
+              />
+            </div>
+          </div>
+
+          {perceptionSettings.enablePerceptionAware && (
+            <div className="space-y-6">
+              {/* AI Enhancement Controls */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Revert Compression */}
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <label className="font-medium text-sm">Revert Compression</label>
+                    <span className="text-sm text-muted-foreground">{perceptionSettings.revertCompression}</span>
+                  </div>
+                  <Slider
+                    value={[perceptionSettings.revertCompression]}
+                    min={0}
+                    max={100}
+                    step={1}
+                    onValueChange={(value) => handlePerceptionChange('revertCompression', value[0])}
+                    className="w-full"
+                  />
+                  <p className="text-xs text-muted-foreground">Removes compression artifacts from source video</p>
+                </div>
+
+                {/* Recover Details */}
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <label className="font-medium text-sm">Recover Details</label>
+                    <span className="text-sm text-muted-foreground">{perceptionSettings.recoverDetails}</span>
+                  </div>
+                  <Slider
+                    value={[perceptionSettings.recoverDetails]}
+                    min={0}
+                    max={100}
+                    step={1}
+                    onValueChange={(value) => handlePerceptionChange('recoverDetails', value[0])}
+                    className="w-full"
+                  />
+                  <p className="text-xs text-muted-foreground">Enhances fine details in faces and important objects</p>
+                </div>
+
+                {/* Sharpen */}
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <label className="font-medium text-sm">Sharpen</label>
+                    <span className="text-sm text-muted-foreground">{perceptionSettings.sharpen}</span>
+                  </div>
+                  <Slider
+                    value={[perceptionSettings.sharpen]}
+                    min={0}
+                    max={100}
+                    step={1}
+                    onValueChange={(value) => handlePerceptionChange('sharpen', value[0])}
+                    className="w-full"
+                  />
+                  <p className="text-xs text-muted-foreground">Selective sharpening for text and edges</p>
+                </div>
+
+                {/* Reduce Noise */}
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <label className="font-medium text-sm">Reduce Noise</label>
+                    <span className="text-sm text-muted-foreground">{perceptionSettings.reduceNoise}</span>
+                  </div>
+                  <Slider
+                    value={[perceptionSettings.reduceNoise]}
+                    min={0}
+                    max={100}
+                    step={1}
+                    onValueChange={(value) => handlePerceptionChange('reduceNoise', value[0])}
+                    className="w-full"
+                  />
+                  <p className="text-xs text-muted-foreground">AI-powered noise reduction preserving important details</p>
+                </div>
+
+                {/* Dehalo */}
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <label className="font-medium text-sm">Dehalo</label>
+                    <span className="text-sm text-muted-foreground">{perceptionSettings.dehalo}</span>
+                  </div>
+                  <Slider
+                    value={[perceptionSettings.dehalo]}
+                    min={0}
+                    max={100}
+                    step={1}
+                    onValueChange={(value) => handlePerceptionChange('dehalo', value[0])}
+                    className="w-full"
+                  />
+                  <p className="text-xs text-muted-foreground">Removes halo artifacts around objects</p>
+                </div>
+
+                {/* Antialias/DeBlur */}
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <label className="font-medium text-sm">Antialias / DeBlur</label>
+                    <span className="text-sm text-muted-foreground">{perceptionSettings.antialiasDeblur}</span>
+                  </div>
+                  <Slider
+                    value={[perceptionSettings.antialiasDeblur]}
+                    min={0}
+                    max={100}
+                    step={1}
+                    onValueChange={(value) => handlePerceptionChange('antialiasDeblur', value[0])}
+                    className="w-full"
+                  />
+                  <p className="text-xs text-muted-foreground">Reduces blur and aliasing in motion</p>
+                </div>
+              </div>
+
+              {/* Output Size Selection */}
+              <div className="border-t border-border/50 pt-6">
+                <h4 className="font-medium mb-4">Output Resolution</h4>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-3">
+                    <label className="font-medium text-sm">Target Resolution</label>
+                    <select
+                      value={perceptionSettings.outputSize}
+                      onChange={(e) => {
+                        const selectedOption = outputSizeOptions.find(opt => opt.value === e.target.value);
+                        handlePerceptionChange('outputSize', e.target.value);
+                        if (selectedOption) {
+                          handlePerceptionChange('scalePercentage', selectedOption.scale);
+                        }
+                      }}
+                      className="w-full h-10 px-3 py-2 text-sm bg-background border border-input rounded-md"
+                    >
+                      {outputSizeOptions.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <label className="font-medium text-sm">Scale</label>
+                      <span className="text-sm text-muted-foreground">{perceptionSettings.scalePercentage}%</span>
+                    </div>
+                    <Slider
+                      value={[perceptionSettings.scalePercentage]}
+                      min={100}
+                      max={800}
+                      step={25}
+                      onValueChange={(value) => handlePerceptionChange('scalePercentage', value[0])}
+                      className="w-full"
+                    />
+                  </div>
+                </div>
+                <div className="mt-4 p-4 bg-secondary/20 rounded-lg">
+                  <p className="text-sm text-muted-foreground">
+                    <strong>Perception-Aware Technology:</strong> Our AI analyzes each frame to identify faces, moving objects, and text, 
+                    applying full quality enhancement to these important areas while using efficient compression for static backgrounds. 
+                    This results in superior visual quality with optimized file sizes.
+                  </p>
+                </div>
+              </div>
+
+              {/* Processing Preview */}
+              <div className="border-t border-border/50 pt-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="font-medium">AI Processing Preview</h4>
+                  <Button size="sm" className="bg-gradient-hero">
+                    Start Processing
+                  </Button>
+                </div>
+                <div className="grid grid-cols-3 gap-4 text-center">
+                  <div className="p-3 bg-secondary/20 rounded-lg">
+                    <div className="text-2xl font-bold text-primary mb-1">🎯</div>
+                    <div className="text-sm font-medium">Face Detection</div>
+                    <div className="text-xs text-muted-foreground">High Quality</div>
+                  </div>
+                  <div className="p-3 bg-secondary/20 rounded-lg">
+                    <div className="text-2xl font-bold text-primary mb-1">🏃</div>
+                    <div className="text-sm font-medium">Motion Analysis</div>
+                    <div className="text-xs text-muted-foreground">Enhanced Details</div>
+                  </div>
+                  <div className="p-3 bg-secondary/20 rounded-lg">
+                    <div className="text-2xl font-bold text-primary mb-1">📝</div>
+                    <div className="text-sm font-medium">Text Recognition</div>
+                    <div className="text-xs text-muted-foreground">Sharp & Clear</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </CardContent>
       </Card>
 
@@ -290,5 +539,6 @@ const VideoPreview = ({ videoUrl, fileName, onQualityChange }: VideoPreviewProps
     </div>
   );
 };
+
 
 export default VideoPreview;
