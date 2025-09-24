@@ -6,7 +6,6 @@ import VideoPreview from "@/components/VideoPreview";
 import VideoDownload from "@/components/VideoDownload";
 import AboutWebsite from "@/components/AboutWebsite";
 import AboutSection from "@/components/AboutSection";
-import LiveStreams from "@/components/YouTubeLiveStreams";
 import { Badge } from "@/components/ui/badge";
 import { Play, Zap, Shield, Globe, Users } from "lucide-react";
 
@@ -250,9 +249,6 @@ const Index = () => {
             </section>
           </>
         )}
-
-        {/* Live Streams Section - Under video editing columns */}
-        <LiveStreams />
 
         {/* Developer Section */}
         <AboutSection />
