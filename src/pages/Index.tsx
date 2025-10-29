@@ -49,10 +49,159 @@ const Index = () => {
       {/* Hero Section */}
       <HeroSection />
 
-      {/* About Section */}
-      <AboutWebsite />
+      {/* Main Content */}
+      <main className="container mx-auto px-4 py-16 space-y-16">
+        
+        {/* Video Upload Section */}
+        <section id="upload" className="py-20 animate-fade-in-up" style={{animationDelay: '0.1s'}}>
+          <div className="text-center mb-16">
+            <Badge className="bg-gradient-primary/20 text-primary border border-primary/30 px-6 py-2 font-cinematic mb-6">
+              PERCEPTION-AWARE ENHANCEMENT
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold font-cinematic mb-6 animate-slide-in-left">
+              Upload & Enhance to{" "}
+              <span className="bg-gradient-text bg-clip-text text-transparent">
+                4K/8K Quality
+              </span>
+            </h2>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-5xl mx-auto leading-relaxed font-inter animate-slide-in-right">
+              Our AI-powered perception-aware engine intelligently detects faces, text, and motion, applying maximum quality enhancement to important areas while optimizing backgrounds for efficient streaming.
+            </p>
+          </div>
+          
+          <VideoUpload onVideoUploaded={handleVideoUploaded} />
+        </section>
 
-      {/* Video Editor Interface Preview */}
+        {/* Video Preview & Quality Editor Section */}
+        {currentVideo && (
+          <>
+            <section id="preview" className="border-t border-border pt-16">
+              <div className="text-center mb-12">
+                <Badge className="bg-gradient-primary/20 text-primary border border-primary/30 px-6 py-2 font-cinematic mb-6">
+                  AI ENHANCEMENT ENGINE
+                </Badge>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                  Live Quality{" "}
+                  <span className="bg-gradient-text bg-clip-text text-transparent">
+                    Comparison
+                  </span>
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                  See the dramatic quality improvement with side-by-side comparison. Our AI detects and enhances faces, text, and moving objects.
+                </p>
+              </div>
+              
+              <VideoPreview
+                videoUrl={currentVideo.url}
+                fileName={currentVideo.name}
+                onQualityChange={handleQualityChange}
+              />
+            </section>
+
+            {/* Download Section */}
+            <section id="download" className="border-t border-border pt-16">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                  Export Enhanced{" "}
+                  <span className="bg-gradient-text bg-clip-text text-transparent">
+                    4K/8K Video
+                  </span>
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                  Download your perception-aware enhanced video in up to 8K resolution.
+                </p>
+              </div>
+              
+              <VideoDownload
+                fileName={currentVideo.name}
+                qualitySettings={qualitySettings}
+                videoUrl={currentVideo.url}
+              />
+            </section>
+          </>
+        )}
+
+        {/* Features Overview */}
+        <section className="py-24 bg-gradient-card rounded-3xl border border-primary/20 shadow-elegant animate-fade-in-up">
+          <div className="container mx-auto px-8">
+            <div className="text-center mb-20">
+              <Badge className="bg-gradient-primary/20 text-primary border border-primary/30 px-6 py-2 font-cinematic mb-6">
+                ADVANCED TECHNOLOGY
+              </Badge>
+              <h2 className="text-4xl md:text-5xl font-bold font-cinematic mb-6">
+                Perception-Aware{" "}
+                <span className="bg-gradient-text bg-clip-text text-transparent">
+                  AI Engine
+                </span>
+              </h2>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto font-inter">
+                Revolutionary AI technology that intelligently allocates quality where it matters most - faces, text, and motion - while efficiently compressing backgrounds.
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-3 gap-8">
+              <div className="text-center p-8 bg-gradient-elegant backdrop-blur-sm rounded-2xl border border-primary/20 hover:shadow-glow transition-all duration-500 group">
+                <div className="w-20 h-20 bg-gradient-primary rounded-3xl flex items-center justify-center mx-auto mb-6">
+                  <span className="text-3xl">🎯</span>
+                </div>
+                <h3 className="text-xl font-bold font-cinematic mb-4 group-hover:bg-gradient-text group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
+                  Smart Region Detection
+                </h3>
+                <p className="text-muted-foreground leading-relaxed font-inter mb-4">
+                  AI-powered detection of faces, text, and moving objects. Automatically prioritizes quality for important visual elements.
+                </p>
+                <div className="text-sm text-primary font-medium">
+                  • Face recognition • Text detection • Motion tracking
+                </div>
+              </div>
+
+              <div className="text-center p-8 bg-gradient-elegant backdrop-blur-sm rounded-2xl border border-primary/20 hover:shadow-glow transition-all duration-500 group">
+                <div className="w-20 h-20 bg-gradient-primary rounded-3xl flex items-center justify-center mx-auto mb-6">
+                  <span className="text-2xl font-bold text-white">8K</span>
+                </div>
+                <h3 className="text-xl font-bold font-cinematic mb-4 group-hover:bg-gradient-text group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
+                  4K/8K Upscaling
+                </h3>
+                <p className="text-muted-foreground leading-relaxed font-inter mb-4">
+                  Advanced upscaling algorithms with detail recovery, noise reduction, and sharpening. Export in resolutions up to 8K.
+                </p>
+                <div className="text-sm text-primary font-medium">
+                  • AI upscaling • Detail enhancement • Noise reduction
+                </div>
+              </div>
+
+              <div className="text-center p-8 bg-gradient-elegant backdrop-blur-sm rounded-2xl border border-primary/20 hover:shadow-glow transition-all duration-500 group">
+                <div className="w-20 h-20 bg-gradient-primary rounded-3xl flex items-center justify-center mx-auto mb-6">
+                  <span className="text-3xl">⚡</span>
+                </div>
+                <h3 className="text-xl font-bold font-cinematic mb-4 group-hover:bg-gradient-text group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
+                  Efficient Compression
+                </h3>
+                <p className="text-muted-foreground leading-relaxed font-inter mb-4">
+                  Perception-aware compression allocates high bitrate to important areas, low bitrate to backgrounds. Optimal quality-to-size ratio.
+                </p>
+                <div className="text-sm text-primary font-medium">
+                  • Selective compression • Optimized streaming • Reduced file size
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Developer Section */}
+        <AboutSection />
+      </main>
+
+      {/* Footer */}
+      <footer className="border-t border-border/50 py-12 mt-24">
+        <div className="container mx-auto px-4 text-center">
+          <p className="text-muted-foreground">
+            © 2024 StreamVizion. Perception-aware AI video enhancement technology.
+        {/* Developer Section */}
+        <AboutSection />
+      </main>
+
+      {/* Footer */}
       <section className="py-20 bg-gradient-elegant relative overflow-hidden animate-fade-in-up" style={{animationDelay: '0.2s'}}>
         {/* Animated background elements */}
         <div className="absolute inset-0">
@@ -346,54 +495,12 @@ const Index = () => {
         </section>
       </main>
 
-
       {/* Footer */}
-      <footer className="bg-card border-t border-border py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-xl font-bold mb-4">
-                StreamVizion
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Professional video enhancement and quality editing platform for creators everywhere.
-              </p>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4 text-foreground">Features</h4>
-              <ul className="space-y-3 text-muted-foreground">
-                <li className="hover:text-foreground transition-colors cursor-pointer">Video Upload</li>
-                <li className="hover:text-foreground transition-colors cursor-pointer">Real-time Preview</li>
-                <li className="hover:text-foreground transition-colors cursor-pointer">Quality Enhancement</li>
-                <li className="hover:text-foreground transition-colors cursor-pointer">Multi-format Export</li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4 text-foreground">Export Options</h4>
-              <ul className="space-y-3 text-muted-foreground">
-                <li className="hover:text-foreground transition-colors cursor-pointer">4K Ultra HD</li>
-                <li className="hover:text-foreground transition-colors cursor-pointer">1080p Full HD</li>
-                <li className="hover:text-foreground transition-colors cursor-pointer">720p HD</li>
-                <li className="hover:text-foreground transition-colors cursor-pointer">Multiple Formats</li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4 text-foreground">Support</h4>
-              <ul className="space-y-3 text-muted-foreground">
-                <li className="hover:text-foreground transition-colors cursor-pointer">Help Center</li>
-                <li className="hover:text-foreground transition-colors cursor-pointer">Video Tutorials</li>
-                <li className="hover:text-foreground transition-colors cursor-pointer">Format Support</li>
-                <li className="hover:text-foreground transition-colors cursor-pointer">Contact Us</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="border-t border-border mt-12 pt-8 text-center text-muted-foreground">
-            <p>&copy; 2024 StreamVizion. Built with ❤️ by Nivas, Swathi & Krishna Priya.</p>
-          </div>
+      <footer className="border-t border-border/50 py-12 mt-24">
+        <div className="container mx-auto px-4 text-center">
+          <p className="text-muted-foreground">
+            © 2024 StreamVizion. Perception-aware AI video enhancement technology.
+          </p>
         </div>
       </footer>
     </div>

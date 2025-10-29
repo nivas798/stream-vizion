@@ -2,7 +2,9 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
-import { Play, Pause, Volume2, VolumeX, Maximize, RotateCcw } from "lucide-react";
+import { Play, Pause, Volume2, VolumeX, Maximize, RotateCcw, Sparkles } from "lucide-react";
+import { processVideoFrame, DetectedRegion } from "@/lib/videoProcessing";
+import type { EnhancementSettings as LibEnhancementSettings, QualitySettings as LibQualitySettings } from "@/lib/videoProcessing";
 
 interface VideoPreviewProps {
   videoUrl: string;
@@ -56,6 +58,14 @@ const VideoPreview = ({ videoUrl, fileName, onQualityChange }: VideoPreviewProps
     scalePercentage: 200,
     enablePerceptionAware: true
   });
+
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [detectedRegions, setDetectedRegions] = useState<DetectedRegion[]>([]);
+  const [showComparison, setShowComparison] = useState(false);
+  const [processedVideoUrl, setProcessedVideoUrl] = useState<string | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const processedCanvasRef = useRef<HTMLCanvasElement>(null);
+  const previousFrameRef = useRef<ImageData | null>(null);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -167,18 +177,216 @@ const VideoPreview = ({ videoUrl, fileName, onQualityChange }: VideoPreviewProps
     { value: "1080p", label: "1080p (1920x1080)", scale: 100 }
   ];
 
+  const processCurrentFrame = useCallback(async () => {
+    if (!videoRef.current || !canvasRef.current) return;
+
+    setIsProcessing(true);
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    
+    if (!ctx) {
+      setIsProcessing(false);
+      return;
+    }
+
+    // Set canvas size to video size
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    
+    // Draw current video frame
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    try {
+      const libSettings: LibEnhancementSettings = {
+        ...perceptionSettings
+      };
+
+      const libQualitySettings: LibQualitySettings = {
+        ...qualitySettings
+      };
+
+      // Process frame
+      const { processedCanvas, regions } = await processVideoFrame(
+        canvas,
+        libSettings,
+        libQualitySettings,
+        previousFrameRef.current || undefined
+      );
+
+      setDetectedRegions(regions);
+
+      // Store current frame for next motion detection
+      previousFrameRef.current = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+      // Convert processed canvas to blob URL
+      processedCanvas.toBlob((blob) => {
+        if (blob) {
+          const url = URL.createObjectURL(blob);
+          setProcessedVideoUrl(url);
+          setShowComparison(true);
+        }
+      }, 'image/jpeg', 0.95);
+
+    } catch (error) {
+      console.error('Processing error:', error);
+    } finally {
+      setIsProcessing(false);
+    }
+  }, [perceptionSettings, qualitySettings]);
+
+  useEffect(() => {
+    // Auto-process on settings change if comparison is active
+    if (showComparison && perceptionSettings.enablePerceptionAware) {
+      const debounceTimer = setTimeout(() => {
+        processCurrentFrame();
+      }, 500);
+      return () => clearTimeout(debounceTimer);
+    }
+  }, [perceptionSettings, showComparison, processCurrentFrame]);
+
   return (
     <div className="space-y-6">
-      <Card className="bg-gradient-card border border-border/50 overflow-hidden">
-        <CardContent className="p-0">
-          {/* Video Player */}
-          <div className="relative bg-black">
-            <video
-              ref={videoRef}
-              src={videoUrl}
-              className="w-full h-auto max-h-96 object-contain"
-              onClick={togglePlay}
-            />
+      {/* Canvas elements (hidden) */}
+      <canvas ref={canvasRef} className="hidden" />
+      <canvas ref={processedCanvasRef} className="hidden" />
+
+      {/* Comparison View */}
+      {showComparison ? (
+        <Card className="bg-gradient-card border border-primary/20 overflow-hidden">
+          <CardContent className="p-0">
+            <div className="grid md:grid-cols-2 gap-0 border-b border-border/50">
+              {/* Original */}
+              <div className="relative bg-black border-r border-border/50">
+                <div className="absolute top-2 left-2 z-10 bg-background/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold">
+                  Original
+                </div>
+                <video
+                  ref={videoRef}
+                  src={videoUrl}
+                  className="w-full h-auto max-h-96 object-contain"
+                  onClick={togglePlay}
+                />
+              </div>
+
+              {/* Enhanced */}
+              <div className="relative bg-black">
+                <div className="absolute top-2 left-2 z-10 bg-gradient-primary px-3 py-1 rounded-full text-xs font-bold text-white">
+                  Enhanced {perceptionSettings.outputSize}
+                </div>
+                {processedVideoUrl && (
+                  <img
+                    src={processedVideoUrl}
+                    alt="Enhanced preview"
+                    className="w-full h-auto max-h-96 object-contain"
+                  />
+                )}
+                
+                {/* Detected Regions Overlay */}
+                {detectedRegions.length > 0 && (
+                  <div className="absolute bottom-2 left-2 right-2 bg-background/90 backdrop-blur-sm p-2 rounded-lg text-xs space-y-1">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      {detectedRegions.filter(r => r.type === 'face').length > 0 && (
+                        <span className="flex items-center gap-1 bg-primary/20 px-2 py-1 rounded">
+                          🎯 {detectedRegions.filter(r => r.type === 'face').length} Face(s)
+                        </span>
+                      )}
+                      {detectedRegions.filter(r => r.type === 'text').length > 0 && (
+                        <span className="flex items-center gap-1 bg-accent/20 px-2 py-1 rounded">
+                          📝 {detectedRegions.filter(r => r.type === 'text').length} Text Region(s)
+                        </span>
+                      )}
+                      {detectedRegions.filter(r => r.type === 'motion').length > 0 && (
+                        <span className="flex items-center gap-1 bg-secondary/20 px-2 py-1 rounded">
+                          🏃 {detectedRegions.filter(r => r.type === 'motion').length} Motion
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Video Controls */}
+            <div className="bg-gradient-to-t from-black/80 to-transparent p-4">
+              <div className="mb-3">
+                <Slider
+                  value={[currentTime]}
+                  max={duration}
+                  step={1}
+                  onValueChange={handleSeek}
+                  className="w-full"
+                />
+              </div>
+              
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={togglePlay}
+                    className="text-white hover:bg-white/20"
+                  >
+                    {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
+                  </Button>
+                  
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={toggleMute}
+                    className="text-white hover:bg-white/20"
+                  >
+                    {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+                  </Button>
+                  
+                  <div className="w-20">
+                    <Slider
+                      value={[volume]}
+                      max={1}
+                      step={0.1}
+                      onValueChange={handleVolumeChange}
+                      className="w-full"
+                    />
+                  </div>
+                  
+                  <span className="text-white text-sm">
+                    {formatTime(currentTime)} / {formatTime(duration)}
+                  </span>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowComparison(false)}
+                    className="text-white hover:bg-white/20"
+                  >
+                    Exit Comparison
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={toggleFullscreen}
+                    className="text-white hover:bg-white/20"
+                  >
+                    <Maximize className="w-5 h-5" />
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      ) : (
+        <Card className="bg-gradient-card border border-border/50 overflow-hidden">
+          <CardContent className="p-0">
+            {/* Video Player */}
+            <div className="relative bg-black">
+              <video
+                ref={videoRef}
+                src={videoUrl}
+                className="w-full h-auto max-h-96 object-contain"
+                onClick={togglePlay}
+              />
             
             {/* Video Controls Overlay */}
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
@@ -242,6 +450,7 @@ const VideoPreview = ({ videoUrl, fileName, onQualityChange }: VideoPreviewProps
           </div>
         </CardContent>
       </Card>
+      )}
 
       {/* Perception-Aware AI Enhancement */}
       <Card className="bg-gradient-to-br from-primary/5 to-accent/5 border border-primary/20">
@@ -426,8 +635,23 @@ const VideoPreview = ({ videoUrl, fileName, onQualityChange }: VideoPreviewProps
               <div className="border-t border-border/50 pt-6">
                 <div className="flex items-center justify-between mb-4">
                   <h4 className="font-medium">AI Processing Preview</h4>
-                  <Button size="sm" className="bg-gradient-hero">
-                    Start Processing
+                  <Button 
+                    size="sm" 
+                    className="bg-gradient-primary"
+                    onClick={processCurrentFrame}
+                    disabled={isProcessing}
+                  >
+                    {isProcessing ? (
+                      <>
+                        <Sparkles className="w-4 h-4 mr-2 animate-spin" />
+                        Processing...
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles className="w-4 h-4 mr-2" />
+                        Process Frame
+                      </>
+                    )}
                   </Button>
                 </div>
                 <div className="grid grid-cols-3 gap-4 text-center">
