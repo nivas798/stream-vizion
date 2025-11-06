@@ -20,16 +20,27 @@ interface QualitySettings {
   hue: number;
 }
 
-interface PerceptionSettings {
-  revertCompression: number;
-  recoverDetails: number;
-  sharpen: number;
-  reduceNoise: number;
-  dehalo: number;
-  antialiasDeblur: number;
-  outputSize: string;
-  scalePercentage: number;
-  enablePerceptionAware: boolean;
+interface AIEnhancementSettings {
+  // Resolution & Detail
+  resolution: string; // "1080p" | "2K" | "4K" | "8K"
+  superResolution: number; // 0-100 AI upscaling strength
+  
+  // Color & Tone
+  colorMode: string; // "soft" | "natural" | "vibrant"
+  colorBoost: number; // 0-100
+  
+  // Clarity & Smoothness
+  denoise: number; // 0-100 Smart denoise
+  faceRestore: number; // 0-100 Face enhancement
+  detailBoost: number; // 0-100
+  
+  // Advanced
+  dehaze: number; // 0-100 Light balance
+  motionSmoothing: number; // 0-100 Frame interpolation
+  stabilization: number; // 0-100
+  audioEnhance: boolean;
+  
+  enableAI: boolean;
 }
 
 const VideoPreview = ({ videoUrl, fileName, onQualityChange }: VideoPreviewProps) => {
@@ -47,17 +58,23 @@ const VideoPreview = ({ videoUrl, fileName, onQualityChange }: VideoPreviewProps
     hue: 0
   });
 
-  const [perceptionSettings, setPerceptionSettings] = useState<PerceptionSettings>({
-    revertCompression: 100,
-    recoverDetails: 75,
-    sharpen: 20,
-    reduceNoise: 70,
-    dehalo: 0,
-    antialiasDeblur: 75,
-    outputSize: "4K",
-    scalePercentage: 200,
-    enablePerceptionAware: true
+  const [aiSettings, setAISettings] = useState<AIEnhancementSettings>({
+    resolution: "4K",
+    superResolution: 80,
+    colorMode: "natural",
+    colorBoost: 60,
+    denoise: 70,
+    faceRestore: 75,
+    detailBoost: 65,
+    dehaze: 50,
+    motionSmoothing: 40,
+    stabilization: 60,
+    audioEnhance: true,
+    enableAI: true
   });
+
+  const [processingMessage, setProcessingMessage] = useState("");
+  const [showSparkles, setShowSparkles] = useState(false);
 
   const [isProcessing, setIsProcessing] = useState(false);
   const [detectedRegions, setDetectedRegions] = useState<DetectedRegion[]>([]);
@@ -96,11 +113,15 @@ const VideoPreview = ({ videoUrl, fileName, onQualityChange }: VideoPreviewProps
     onQualityChange?.(qualitySettings);
   }, [qualitySettings, onQualityChange]);
 
-  const handlePerceptionChange = useCallback((setting: keyof PerceptionSettings, value: number | string | boolean) => {
-    setPerceptionSettings(prev => ({
+  const handleAIChange = useCallback((setting: keyof AIEnhancementSettings, value: number | string | boolean) => {
+    setAISettings(prev => ({
       ...prev,
       [setting]: value
     }));
+    
+    // Show loveable feedback
+    setShowSparkles(true);
+    setTimeout(() => setShowSparkles(false), 1000);
   }, []);
 
   const togglePlay = () => {
@@ -170,17 +191,25 @@ const VideoPreview = ({ videoUrl, fileName, onQualityChange }: VideoPreviewProps
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
-  const outputSizeOptions = [
-    { value: "4K", label: "4K (3840x2160)", scale: 200 },
-    { value: "8K", label: "8K (7680x4320)", scale: 400 },
-    { value: "2K", label: "2K (2560x1440)", scale: 133 },
-    { value: "1080p", label: "1080p (1920x1080)", scale: 100 }
+  const resolutionOptions = [
+    { value: "1080p", label: "1080p Full HD", icon: "📺" },
+    { value: "2K", label: "2K Quad HD", icon: "🎬" },
+    { value: "4K", label: "4K Ultra HD", icon: "✨" },
+    { value: "8K", label: "8K Cinema", icon: "🌟" }
+  ];
+
+  const colorModes = [
+    { value: "soft", label: "Soft", desc: "Gentle & warm" },
+    { value: "natural", label: "Natural", desc: "True to life" },
+    { value: "vibrant", label: "Vibrant", desc: "Bold & cinematic" }
   ];
 
   const processCurrentFrame = useCallback(async () => {
     if (!videoRef.current || !canvasRef.current) return;
 
     setIsProcessing(true);
+    setProcessingMessage("Enhancing with love ❤️");
+    
     const video = videoRef.current;
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
@@ -190,23 +219,31 @@ const VideoPreview = ({ videoUrl, fileName, onQualityChange }: VideoPreviewProps
       return;
     }
 
-    // Set canvas size to video size
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
-    
-    // Draw current video frame
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
     try {
+      // Map AI settings to processing settings
       const libSettings: LibEnhancementSettings = {
-        ...perceptionSettings
+        revertCompression: 100,
+        recoverDetails: aiSettings.detailBoost,
+        sharpen: aiSettings.superResolution / 5,
+        reduceNoise: aiSettings.denoise,
+        dehalo: aiSettings.dehaze,
+        antialiasDeblur: aiSettings.faceRestore,
+        outputSize: aiSettings.resolution,
+        scalePercentage: aiSettings.resolution === "8K" ? 400 : aiSettings.resolution === "4K" ? 200 : aiSettings.resolution === "2K" ? 133 : 100,
+        enablePerceptionAware: aiSettings.enableAI
       };
 
       const libQualitySettings: LibQualitySettings = {
-        ...qualitySettings
+        ...qualitySettings,
+        saturation: qualitySettings.saturation * (1 + aiSettings.colorBoost / 200)
       };
 
-      // Process frame
+      setProcessingMessage("Polishing your video for perfection ✨");
+
       const { processedCanvas, regions } = await processVideoFrame(
         canvas,
         libSettings,
@@ -215,35 +252,41 @@ const VideoPreview = ({ videoUrl, fileName, onQualityChange }: VideoPreviewProps
       );
 
       setDetectedRegions(regions);
-
-      // Store current frame for next motion detection
       previousFrameRef.current = ctx.getImageData(0, 0, canvas.width, canvas.height);
 
-      // Convert processed canvas to blob URL
       processedCanvas.toBlob((blob) => {
         if (blob) {
           const url = URL.createObjectURL(blob);
           setProcessedVideoUrl(url);
           setShowComparison(true);
+          setProcessingMessage("Your moments deserve the best light ✨");
+          setShowSparkles(true);
+          
+          // Play a success animation
+          setTimeout(() => {
+            setShowSparkles(false);
+            setProcessingMessage("");
+          }, 2000);
         }
       }, 'image/jpeg', 0.95);
 
     } catch (error) {
       console.error('Processing error:', error);
+      setProcessingMessage("Oops! Let's try again 💫");
+      setTimeout(() => setProcessingMessage(""), 2000);
     } finally {
       setIsProcessing(false);
     }
-  }, [perceptionSettings, qualitySettings]);
+  }, [aiSettings, qualitySettings]);
 
   useEffect(() => {
-    // Auto-process on settings change if comparison is active
-    if (showComparison && perceptionSettings.enablePerceptionAware) {
+    if (showComparison && aiSettings.enableAI) {
       const debounceTimer = setTimeout(() => {
         processCurrentFrame();
       }, 500);
       return () => clearTimeout(debounceTimer);
     }
-  }, [perceptionSettings, showComparison, processCurrentFrame]);
+  }, [aiSettings, showComparison, processCurrentFrame]);
 
   return (
     <div className="space-y-6">
@@ -271,8 +314,9 @@ const VideoPreview = ({ videoUrl, fileName, onQualityChange }: VideoPreviewProps
 
               {/* Enhanced */}
               <div className="relative bg-black">
-                <div className="absolute top-2 left-2 z-10 bg-gradient-primary px-3 py-1 rounded-full text-xs font-bold text-white">
-                  Enhanced {perceptionSettings.outputSize}
+                <div className="absolute top-2 left-2 z-10 bg-gradient-primary px-3 py-1 rounded-full text-xs font-bold text-white flex items-center gap-2">
+                  <Sparkles className="w-3 h-3 animate-pulse" />
+                  Enhanced {aiSettings.resolution}
                 </div>
                 {processedVideoUrl && (
                   <img
@@ -452,225 +496,266 @@ const VideoPreview = ({ videoUrl, fileName, onQualityChange }: VideoPreviewProps
       </Card>
       )}
 
-      {/* Perception-Aware AI Enhancement */}
-      <Card className="bg-gradient-to-br from-primary/5 to-accent/5 border border-primary/20">
+      {/* AI Enhancement Panel with Loveable UX */}
+      <Card className="bg-gradient-to-br from-primary/5 to-accent/5 border border-primary/20 relative overflow-hidden">
+        {showSparkles && (
+          <div className="absolute inset-0 pointer-events-none">
+            <Sparkles className="absolute top-4 right-4 w-6 h-6 text-primary animate-pulse" />
+            <Sparkles className="absolute bottom-4 left-4 w-4 h-4 text-accent animate-bounce" />
+            <Sparkles className="absolute top-1/2 left-1/2 w-5 h-5 text-primary/50 animate-ping" />
+          </div>
+        )}
+        
         <CardContent className="p-6">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">AI</span>
+              <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center animate-red-pulse">
+                <Sparkles className="w-5 h-5 text-white" />
               </div>
               <div>
-                <h3 className="text-xl font-bold font-display">Perception-Aware Enhancement</h3>
-                <p className="text-sm text-muted-foreground">Intelligent 4K/8K upscaling with selective compression</p>
+                <h3 className="text-xl font-bold font-display flex items-center gap-2">
+                  AI Video Enhancement
+                  {processingMessage && <span className="text-sm font-normal text-primary animate-pulse">✨</span>}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {processingMessage || "Professional AI-powered video enhancement"}
+                </p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-sm text-muted-foreground">Enable AI</span>
               <input
                 type="checkbox"
-                checked={perceptionSettings.enablePerceptionAware}
-                onChange={(e) => handlePerceptionChange('enablePerceptionAware', e.target.checked)}
-                className="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary"
+                checked={aiSettings.enableAI}
+                onChange={(e) => handleAIChange('enableAI', e.target.checked)}
+                className="w-5 h-5 text-primary bg-background border-2 border-primary rounded focus:ring-2 focus:ring-primary transition-all"
               />
             </div>
           </div>
 
-          {perceptionSettings.enablePerceptionAware && (
-            <div className="space-y-6">
-              {/* AI Enhancement Controls */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Revert Compression */}
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <label className="font-medium text-sm">Revert Compression</label>
-                    <span className="text-sm text-muted-foreground">{perceptionSettings.revertCompression}</span>
-                  </div>
-                  <Slider
-                    value={[perceptionSettings.revertCompression]}
-                    min={0}
-                    max={100}
-                    step={1}
-                    onValueChange={(value) => handlePerceptionChange('revertCompression', value[0])}
-                    className="w-full"
-                  />
-                  <p className="text-xs text-muted-foreground">Removes compression artifacts from source video</p>
+          {aiSettings.enableAI && (
+            <div className="space-y-8">
+              {/* Resolution Selection - Featured */}
+              <div className="bg-gradient-card p-6 rounded-xl border border-primary/10">
+                <h4 className="font-semibold mb-4 flex items-center gap-2">
+                  🎬 AI Super Resolution
+                </h4>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                  {resolutionOptions.map((option) => (
+                    <button
+                      key={option.value}
+                      onClick={() => handleAIChange('resolution', option.value)}
+                      className={`p-4 rounded-lg border-2 transition-all ${
+                        aiSettings.resolution === option.value
+                          ? 'border-primary bg-primary/10 shadow-glow'
+                          : 'border-border/50 hover:border-primary/50'
+                      }`}
+                    >
+                      <div className="text-2xl mb-1">{option.icon}</div>
+                      <div className="text-sm font-medium">{option.label}</div>
+                    </button>
+                  ))}
                 </div>
-
-                {/* Recover Details */}
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
-                    <label className="font-medium text-sm">Recover Details</label>
-                    <span className="text-sm text-muted-foreground">{perceptionSettings.recoverDetails}</span>
+                    <label className="text-sm font-medium">Super Resolution Strength</label>
+                    <span className="text-sm text-primary font-semibold">{aiSettings.superResolution}%</span>
                   </div>
                   <Slider
-                    value={[perceptionSettings.recoverDetails]}
+                    value={[aiSettings.superResolution]}
                     min={0}
                     max={100}
-                    step={1}
-                    onValueChange={(value) => handlePerceptionChange('recoverDetails', value[0])}
+                    step={5}
+                    onValueChange={(value) => handleAIChange('superResolution', value[0])}
                     className="w-full"
                   />
-                  <p className="text-xs text-muted-foreground">Enhances fine details in faces and important objects</p>
-                </div>
-
-                {/* Sharpen */}
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <label className="font-medium text-sm">Sharpen</label>
-                    <span className="text-sm text-muted-foreground">{perceptionSettings.sharpen}</span>
-                  </div>
-                  <Slider
-                    value={[perceptionSettings.sharpen]}
-                    min={0}
-                    max={100}
-                    step={1}
-                    onValueChange={(value) => handlePerceptionChange('sharpen', value[0])}
-                    className="w-full"
-                  />
-                  <p className="text-xs text-muted-foreground">Selective sharpening for text and edges</p>
-                </div>
-
-                {/* Reduce Noise */}
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <label className="font-medium text-sm">Reduce Noise</label>
-                    <span className="text-sm text-muted-foreground">{perceptionSettings.reduceNoise}</span>
-                  </div>
-                  <Slider
-                    value={[perceptionSettings.reduceNoise]}
-                    min={0}
-                    max={100}
-                    step={1}
-                    onValueChange={(value) => handlePerceptionChange('reduceNoise', value[0])}
-                    className="w-full"
-                  />
-                  <p className="text-xs text-muted-foreground">AI-powered noise reduction preserving important details</p>
-                </div>
-
-                {/* Dehalo */}
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <label className="font-medium text-sm">Dehalo</label>
-                    <span className="text-sm text-muted-foreground">{perceptionSettings.dehalo}</span>
-                  </div>
-                  <Slider
-                    value={[perceptionSettings.dehalo]}
-                    min={0}
-                    max={100}
-                    step={1}
-                    onValueChange={(value) => handlePerceptionChange('dehalo', value[0])}
-                    className="w-full"
-                  />
-                  <p className="text-xs text-muted-foreground">Removes halo artifacts around objects</p>
-                </div>
-
-                {/* Antialias/DeBlur */}
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <label className="font-medium text-sm">Antialias / DeBlur</label>
-                    <span className="text-sm text-muted-foreground">{perceptionSettings.antialiasDeblur}</span>
-                  </div>
-                  <Slider
-                    value={[perceptionSettings.antialiasDeblur]}
-                    min={0}
-                    max={100}
-                    step={1}
-                    onValueChange={(value) => handlePerceptionChange('antialiasDeblur', value[0])}
-                    className="w-full"
-                  />
-                  <p className="text-xs text-muted-foreground">Reduces blur and aliasing in motion</p>
+                  <p className="text-xs text-muted-foreground">✨ Sharper edges, more defined details, cinema-quality upscaling</p>
                 </div>
               </div>
 
-              {/* Output Size Selection */}
-              <div className="border-t border-border/50 pt-6">
-                <h4 className="font-medium mb-4">Output Resolution</h4>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-3">
-                    <label className="font-medium text-sm">Target Resolution</label>
-                    <select
-                      value={perceptionSettings.outputSize}
-                      onChange={(e) => {
-                        const selectedOption = outputSizeOptions.find(opt => opt.value === e.target.value);
-                        handlePerceptionChange('outputSize', e.target.value);
-                        if (selectedOption) {
-                          handlePerceptionChange('scalePercentage', selectedOption.scale);
-                        }
-                      }}
-                      className="w-full h-10 px-3 py-2 text-sm bg-background border border-input rounded-md"
+              {/* Color Enhancement */}
+              <div className="bg-gradient-card p-6 rounded-xl border border-primary/10">
+                <h4 className="font-semibold mb-4 flex items-center gap-2">
+                  🌈 Vivid Color Boost
+                </h4>
+                <div className="grid grid-cols-3 gap-3 mb-6">
+                  {colorModes.map((mode) => (
+                    <button
+                      key={mode.value}
+                      onClick={() => handleAIChange('colorMode', mode.value)}
+                      className={`p-3 rounded-lg border-2 transition-all ${
+                        aiSettings.colorMode === mode.value
+                          ? 'border-accent bg-accent/10'
+                          : 'border-border/50 hover:border-accent/50'
+                      }`}
                     >
-                      {outputSizeOptions.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
+                      <div className="text-sm font-medium">{mode.label}</div>
+                      <div className="text-xs text-muted-foreground">{mode.desc}</div>
+                    </button>
+                  ))}
+                </div>
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <label className="text-sm font-medium">Color Intensity</label>
+                    <span className="text-sm text-accent font-semibold">{aiSettings.colorBoost}%</span>
                   </div>
+                  <Slider
+                    value={[aiSettings.colorBoost]}
+                    min={0}
+                    max={100}
+                    step={5}
+                    onValueChange={(value) => handleAIChange('colorBoost', value[0])}
+                    className="w-full"
+                  />
+                  <p className="text-xs text-muted-foreground">🎨 Natural skin tones, richer colors, cinematic look</p>
+                </div>
+              </div>
+
+              {/* Clarity & Smoothness */}
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Smart Denoise */}
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <label className="text-sm font-medium">🌤 Smart Denoise AI</label>
+                    <span className="text-sm text-muted-foreground">{aiSettings.denoise}%</span>
+                  </div>
+                  <Slider
+                    value={[aiSettings.denoise]}
+                    min={0}
+                    max={100}
+                    step={5}
+                    onValueChange={(value) => handleAIChange('denoise', value[0])}
+                  />
+                  <p className="text-xs text-muted-foreground">Removes grain & pixel noise</p>
+                </div>
+
+                {/* Face Restore */}
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <label className="text-sm font-medium">💎 AI Face Restore</label>
+                    <span className="text-sm text-muted-foreground">{aiSettings.faceRestore}%</span>
+                  </div>
+                  <Slider
+                    value={[aiSettings.faceRestore]}
+                    min={0}
+                    max={100}
+                    step={5}
+                    onValueChange={(value) => handleAIChange('faceRestore', value[0])}
+                  />
+                  <p className="text-xs text-muted-foreground">Natural face clarity</p>
+                </div>
+
+                {/* Detail Boost */}
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <label className="text-sm font-medium">✨ Detail Boost</label>
+                    <span className="text-sm text-muted-foreground">{aiSettings.detailBoost}%</span>
+                  </div>
+                  <Slider
+                    value={[aiSettings.detailBoost]}
+                    min={0}
+                    max={100}
+                    step={5}
+                    onValueChange={(value) => handleAIChange('detailBoost', value[0])}
+                  />
+                  <p className="text-xs text-muted-foreground">Enhance fine textures</p>
+                </div>
+
+                {/* Dehaze */}
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <label className="text-sm font-medium">🌫️ AI Light Balance</label>
+                    <span className="text-sm text-muted-foreground">{aiSettings.dehaze}%</span>
+                  </div>
+                  <Slider
+                    value={[aiSettings.dehaze]}
+                    min={0}
+                    max={100}
+                    step={5}
+                    onValueChange={(value) => handleAIChange('dehaze', value[0])}
+                  />
+                  <p className="text-xs text-muted-foreground">Fix haze & lighting</p>
+                </div>
+              </div>
+
+              {/* Advanced Features */}
+              <div className="border-t border-border/50 pt-6 space-y-6">
+                <h4 className="font-semibold">Advanced Features</h4>
+                
+                <div className="grid md:grid-cols-2 gap-6">
+                  {/* Motion Smoothing */}
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
-                      <label className="font-medium text-sm">Scale</label>
-                      <span className="text-sm text-muted-foreground">{perceptionSettings.scalePercentage}%</span>
+                      <label className="text-sm font-medium">🔁 Fluid Motion+</label>
+                      <span className="text-sm text-muted-foreground">{aiSettings.motionSmoothing}%</span>
                     </div>
                     <Slider
-                      value={[perceptionSettings.scalePercentage]}
-                      min={100}
-                      max={800}
-                      step={25}
-                      onValueChange={(value) => handlePerceptionChange('scalePercentage', value[0])}
-                      className="w-full"
+                      value={[aiSettings.motionSmoothing]}
+                      min={0}
+                      max={100}
+                      step={5}
+                      onValueChange={(value) => handleAIChange('motionSmoothing', value[0])}
                     />
+                    <p className="text-xs text-muted-foreground">Frame interpolation for smooth playback</p>
+                  </div>
+
+                  {/* Stabilization */}
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <label className="text-sm font-medium">💖 Steady Vision AI</label>
+                      <span className="text-sm text-muted-foreground">{aiSettings.stabilization}%</span>
+                    </div>
+                    <Slider
+                      value={[aiSettings.stabilization]}
+                      min={0}
+                      max={100}
+                      step={5}
+                      onValueChange={(value) => handleAIChange('stabilization', value[0])}
+                    />
+                    <p className="text-xs text-muted-foreground">Reduce camera shake</p>
                   </div>
                 </div>
-                <div className="mt-4 p-4 bg-secondary/20 rounded-lg">
-                  <p className="text-sm text-muted-foreground">
-                    <strong>Perception-Aware Technology:</strong> Our AI analyzes each frame to identify faces, moving objects, and text, 
-                    applying full quality enhancement to these important areas while using efficient compression for static backgrounds. 
-                    This results in superior visual quality with optimized file sizes.
-                  </p>
+
+                {/* Audio Enhancement */}
+                <div className="flex items-center justify-between p-4 bg-secondary/20 rounded-lg">
+                  <div>
+                    <label className="text-sm font-medium flex items-center gap-2">
+                      💬 Crystal Clear Audio AI
+                    </label>
+                    <p className="text-xs text-muted-foreground">Remove background noise & enhance voice clarity</p>
+                  </div>
+                  <input
+                    type="checkbox"
+                    checked={aiSettings.audioEnhance}
+                    onChange={(e) => handleAIChange('audioEnhance', e.target.checked)}
+                    className="w-5 h-5 text-primary bg-background border-2 border-primary rounded focus:ring-2 focus:ring-primary"
+                  />
                 </div>
               </div>
 
-              {/* Processing Preview */}
+              {/* AI Processing Button */}
               <div className="border-t border-border/50 pt-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h4 className="font-medium">AI Processing Preview</h4>
-                  <Button 
-                    size="sm" 
-                    className="bg-gradient-primary"
-                    onClick={processCurrentFrame}
-                    disabled={isProcessing}
-                  >
-                    {isProcessing ? (
-                      <>
-                        <Sparkles className="w-4 h-4 mr-2 animate-spin" />
-                        Processing...
-                      </>
-                    ) : (
-                      <>
-                        <Sparkles className="w-4 h-4 mr-2" />
-                        Process Frame
-                      </>
-                    )}
-                  </Button>
-                </div>
-                <div className="grid grid-cols-3 gap-4 text-center">
-                  <div className="p-3 bg-secondary/20 rounded-lg">
-                    <div className="text-2xl font-bold text-primary mb-1">🎯</div>
-                    <div className="text-sm font-medium">Face Detection</div>
-                    <div className="text-xs text-muted-foreground">High Quality</div>
-                  </div>
-                  <div className="p-3 bg-secondary/20 rounded-lg">
-                    <div className="text-2xl font-bold text-primary mb-1">🏃</div>
-                    <div className="text-sm font-medium">Motion Analysis</div>
-                    <div className="text-xs text-muted-foreground">Enhanced Details</div>
-                  </div>
-                  <div className="p-3 bg-secondary/20 rounded-lg">
-                    <div className="text-2xl font-bold text-primary mb-1">📝</div>
-                    <div className="text-sm font-medium">Text Recognition</div>
-                    <div className="text-xs text-muted-foreground">Sharp & Clear</div>
-                  </div>
-                </div>
+                <Button 
+                  size="lg" 
+                  className="w-full bg-gradient-primary text-white font-semibold shadow-glow hover:shadow-card-hover transition-all"
+                  onClick={processCurrentFrame}
+                  disabled={isProcessing}
+                >
+                  {isProcessing ? (
+                    <span className="flex items-center gap-2">
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      {processingMessage}
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-2">
+                      <Sparkles className="w-5 h-5" />
+                      I've polished your video for perfection!
+                    </span>
+                  )}
+                </Button>
+                <p className="text-center text-xs text-muted-foreground mt-3">
+                  ✨ Your moments deserve the best light
+                </p>
               </div>
             </div>
           )}
